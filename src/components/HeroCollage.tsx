@@ -42,62 +42,54 @@ export function HeroCollage(props: { className?: string }) {
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-[22px] bg-[#0b0b0b] text-white shadow-sm',
+        'relative overflow-hidden rounded-[22px] border border-[color:var(--stroke)] bg-[color:var(--paper-muted)] p-5 shadow-sm',
         props.className,
       )}
     >
-      {/* Dotted / grid background */}
-      <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(255,255,255,0.35)_1px,transparent_1px)] [background-size:14px_14px]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,99,67,0.35),transparent_55%)]" />
+      <div className="tv-kicker text-[10px] font-semibold text-[color:var(--ink-muted)]">
+        Live feed (demo)
+      </div>
+      <div className="mt-2 text-sm font-semibold text-[color:var(--ink)]">
+        What people see when they browse
+      </div>
 
-      {/* Feed cards */}
-      <div className="relative p-5">
-        <div className="tv-kicker text-[10px] font-semibold text-white/60">
-          Live feed (demo)
-        </div>
-        <div className="mt-2 text-sm font-semibold text-white/85">
-          What people see when they browse
-        </div>
-
-        <div className="mt-4 space-y-3">
-          {BUBBLES.map((b, idx) => (
-            <div
-              key={`${b.name}-${idx}`}
-              className={cn(
-                'rounded-xl border bg-white/95 p-3 text-black shadow-sm',
-                b.accent
-                  ? 'border-[color:var(--brand)]'
-                  : 'border-white/15',
-              )}
-            >
-              <div className="flex items-start gap-3">
-                <div
-                  className={cn(
-                    'flex h-9 w-9 flex-none items-center justify-center rounded-full text-[10px] font-semibold',
-                    b.accent
-                      ? 'bg-[color:var(--brand)] text-white'
-                      : 'bg-black/10 text-black/70',
-                  )}
-                  aria-hidden="true"
-                >
-                  Photo
-                </div>
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                    <div className="text-xs font-semibold text-black">
-                      {b.name}
-                    </div>
-                    <span className="rounded-full bg-black/5 px-2 py-0.5 text-[10px] font-semibold text-black/60">
-                      {b.role}
-                    </span>
+      <div className="mt-4 space-y-3">
+        {BUBBLES.map((b, idx) => (
+          <div
+            key={`${b.name}-${idx}`}
+            className={cn(
+              'rounded-xl border bg-white p-3 text-[color:var(--ink)] shadow-sm',
+              b.accent
+                ? 'border-[color:var(--brand)]'
+                : 'border-[color:var(--stroke)]',
+            )}
+          >
+            <div className="flex items-start gap-3">
+              <div
+                className={cn(
+                  'flex h-9 w-9 flex-none items-center justify-center rounded-full text-[10px] font-semibold',
+                  b.accent
+                    ? 'bg-[color:var(--brand)] text-white'
+                    : 'bg-[color:var(--paper-muted)] text-[color:var(--ink-muted)] border border-[color:var(--stroke)]',
+                )}
+                aria-hidden="true"
+              >
+                tv
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <div className="text-xs font-semibold text-[color:var(--ink)]">
+                    {b.name}
                   </div>
-                  <div className="mt-1 text-sm text-black/75">{b.message}</div>
+                  <span className="rounded-full border border-[color:var(--stroke)] bg-[color:var(--paper-muted)] px-2 py-0.5 text-[10px] font-semibold text-[color:var(--ink-muted)]">
+                    {b.role}
+                  </span>
                 </div>
+                <div className="mt-1 text-sm text-[color:var(--ink-muted)]">{b.message}</div>
               </div>
             </div>
-          ))}
-        </div>
-
+          </div>
+        ))}
       </div>
     </div>
   )

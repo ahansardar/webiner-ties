@@ -26,9 +26,7 @@ export function FeaturedEventCard(props: {
       )}
     >
       <div className="relative h-32 bg-[color:var(--paper-muted)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_35%,rgba(255,99,67,0.38),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_75%,rgba(17,17,17,0.08),transparent_55%)]" />
-        <div className="absolute inset-0 opacity-35 [background-image:radial-gradient(rgba(17,17,17,0.18)_1px,transparent_1px)] [background-size:16px_16px]" />
+        <div className="absolute inset-x-0 bottom-0 h-1 bg-[color:var(--brand)]" />
 
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[color:var(--stroke-strong)] bg-white shadow-sm transition-transform duration-300 group-hover:scale-105">

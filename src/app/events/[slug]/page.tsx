@@ -180,8 +180,7 @@ export default async function Page({
               />
             ) : (
               <div className="relative flex min-h-64 items-center justify-center overflow-hidden bg-[color:var(--paper-muted)] p-8">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_35%,rgba(255,99,67,0.38),transparent_60%)]" />
-                <div className="absolute inset-0 opacity-35 [background-image:radial-gradient(rgba(17,17,17,0.18)_1px,transparent_1px)] [background-size:16px_16px]" />
+                <div className="absolute inset-x-0 bottom-0 h-1.5 bg-[color:var(--brand)]" />
                 <div className="relative z-10 text-center">
                   <div className="tv-display text-3xl font-semibold leading-tight tracking-tight text-[color:var(--ink)]">
                     {event.title}
