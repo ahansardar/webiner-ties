@@ -1,13 +1,9 @@
-import { isAdminAuthed } from '@/server/adminAuth'
 import { Container } from '@/components/Container'
 import { AdminClient } from './ui/AdminClient'
-import { AdminLogin } from './ui/AdminLogin'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Page() {
-  const authed = await isAdminAuthed()
-
   return (
     <Container className="py-12">
       <div className="flex items-end justify-between gap-4">
@@ -25,7 +21,7 @@ export default async function Page() {
       </div>
 
       <div className="mt-8">
-        {authed ? <AdminClient /> : <AdminLogin />}
+        <AdminClient />
       </div>
     </Container>
   )
