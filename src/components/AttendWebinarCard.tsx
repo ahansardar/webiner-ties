@@ -137,16 +137,16 @@ export function AttendWebinarCard(props: {
 
       {/* Sticky Footer Section on Mobile */}
       {shouldStick ? (
-        <div className="fixed bottom-0 left-0 right-0 border-t border-white/10 bg-[color:var(--surface-container-highest)]/95 backdrop-blur-xl px-4 py-3 safe-area-bottom">
-          <div className="flex items-center justify-between gap-3 max-w-md mx-auto">
-            <div>
-              <div className="text-xs text-[color:var(--ink-muted)] uppercase tracking-wider">Ticket</div>
-              <div className="text-lg font-bold text-[color:var(--ink-highlight)]">FREE</div>
+        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-[#1a1a1e]/95 backdrop-blur-xl px-5 py-4 safe-area-bottom">
+          <div className="flex items-center justify-between gap-4 max-w-md mx-auto">
+            <div className="flex-1">
+              <div className="text-xs font-semibold text-[color:var(--ink-muted)] uppercase tracking-wider">Ticket</div>
+              <div className="mt-1 text-2xl font-bold text-[color:var(--ink-highlight)]">FREE</div>
             </div>
             <button 
               type="button" 
               onClick={() => setMode('form')} 
-              className="tv-btn tv-btn-primary px-8 py-3 font-semibold whitespace-nowrap"
+              className="flex-shrink-0 rounded-full bg-[color:var(--ink-highlight)] text-black px-8 py-3 font-bold text-base hover:bg-[color-mix(in_oklab,var(--ink-highlight),#09090b_10%)] transition-all"
             >
               Next step
             </button>
