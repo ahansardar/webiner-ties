@@ -196,17 +196,20 @@ textarea.tv-input {
   padding: 0.75rem 1.25rem;
   font-size: 0.9rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
   color: var(--ink);
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.2s ease, 
+              box-shadow 0.2s ease;
 }
 
 .tv-btn:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.20);
+  transform: translateY(-2px);
 }
 
 .tv-btn:active {
@@ -219,12 +222,12 @@ textarea.tv-input {
   color: #09090b;
   font-weight: 700;
   letter-spacing: -0.01em;
-  box-shadow: 0 2px 12px rgba(228, 213, 160, 0.20);
+  box-shadow: 0 4px 16px rgba(228, 213, 160, 0.25);
 }
 
 .tv-btn-primary:hover {
-  background: color-mix(in oklab, var(--ink-highlight), white 10%);
-  box-shadow: 0 4px 20px rgba(228, 213, 160, 0.30);
+  background: color-mix(in oklab, var(--ink-highlight), white 12%);
+  box-shadow: 0 6px 28px rgba(228, 213, 160, 0.35);
 }
 
 .tv-btn-accent {
@@ -232,7 +235,7 @@ textarea.tv-input {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 0.75rem;
+  border-radius: 0.875rem;
   padding: 0.625rem 1.375rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -241,12 +244,14 @@ textarea.tv-input {
   border: none;
   cursor: pointer;
   letter-spacing: -0.01em;
-  transition: background 0.15s, box-shadow 0.2s, transform 0.15s;
+  transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.2s, 
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .tv-btn-accent:hover {
-  background: color-mix(in oklab, var(--accent), #09090b 6%);
-  box-shadow: 0 0 0 4px var(--accent-glow), 0 4px 20px rgba(228, 213, 160, 0.12);
-  transform: translateY(-1px);
+  background: color-mix(in oklab, var(--accent), #09090b 8%);
+  box-shadow: 0 0 0 4px var(--accent-glow), 0 6px 24px rgba(228, 213, 160, 0.18);
+  transform: translateY(-2px);
 }
 .tv-btn-accent:active { transform: translateY(0); }
 
@@ -277,16 +282,16 @@ textarea.tv-input {
 
 .tv-section-label {
   font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--accent);
 }
 
 .tv-kicker {
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
@@ -310,9 +315,11 @@ textarea.tv-input {
 .tv-card {
   border: 1px solid var(--stroke);
   background: var(--card);
-  border-radius: 1rem;
-  transition: border-color 0.2s ease, background 0.2s ease,
-              box-shadow 0.2s ease, transform 0.2s ease;
+  border-radius: 1.25rem;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tv-card-muted { background: var(--paper-muted); }
@@ -321,14 +328,14 @@ textarea.tv-input {
 .tv-card.tv-interactive:hover {
   background: var(--card-hover);
   border-color: var(--stroke-mid);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.55), 0 0 0 1px var(--stroke-mid);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.60), 0 0 0 1px var(--stroke-mid);
+  transform: translateY(-3px);
 }
 
 /* Glow card for CTA banners */
 .tv-card-glow {
   border: 1px solid var(--accent-border);
-  background: linear-gradient(135deg, rgba(228, 213, 160, 0.05) 0%, var(--card) 55%);
+  background: linear-gradient(135deg, rgba(228, 213, 160, 0.08) 0%, var(--card) 55%);
 }
 
 /* ═══════════════════════════════════════════════
@@ -729,6 +736,36 @@ textarea.tv-input {
 
   /* Ticket card smaller padding on mobile */
   .tv-ticket-section { padding: 1.125rem; }
+
+  /* STICKY ATTEND CARD on mobile */
+  .attend-card-sticky {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid var(--stroke-mid);
+    background: linear-gradient(135deg, rgba(20, 20, 23, 0.98) 0%, rgba(24, 24, 28, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    max-height: 60vh;
+    overflow-y: auto;
+    animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  @keyframes slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Add bottom spacing to page content when card is sticky */
+  main.has-sticky-attend {
+    padding-bottom: max(320px, 70vh);
+  }
 }
 
 /* Tablet: 641px–1023px */

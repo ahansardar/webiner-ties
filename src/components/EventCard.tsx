@@ -13,15 +13,15 @@ export function EventCard(props: { event: ListedEvent; className?: string }) {
   return (
     <Link
       href={`/events/${event.slug}`}
-      className={cn('tv-card tv-card-hover group block rounded-[24px] p-5', props.className)}
+      className={cn('tv-card tv-card-hover group block rounded-[24px] p-6', props.className)}
     >
-      <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-[18px] border border-white/10 bg-[color:var(--card-hover)]">
+      <div className="relative mb-5 aspect-[16/9] w-full overflow-hidden rounded-[18px] border border-white/10 bg-[color:var(--card-hover)]">
         {event.coverImageUrl ? (
           <Image
             alt={event.title}
             src={event.coverImageUrl}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           />
         ) : (
@@ -33,17 +33,17 @@ export function EventCard(props: { event: ListedEvent; className?: string }) {
 
       <div className="flex items-center justify-between gap-3">
         <div className="tv-kicker text-[10px] font-semibold tracking-wider text-[color:var(--ink-muted)]">
-          {isOnline ? 'Virtual' : 'In person'} · {event.organizer.name}
+          {isOnline ? 'VIRTUAL' : 'IN PERSON'} · {event.organizer.name.toUpperCase()}
         </div>
       </div>
 
-      <div className="mt-3">
-        <h3 className="line-clamp-2 text-base font-bold leading-snug text-[color:var(--ink)] transition-colors duration-150 group-hover:text-[color:var(--ink-highlight)]">
+      <div className="mt-4">
+        <h3 className="line-clamp-2 text-base font-bold leading-snug text-[color:var(--ink)] transition-colors duration-200 group-hover:text-[color:var(--ink-highlight)]">
           {event.title}
         </h3>
-        <p className="mt-1.5 line-clamp-2 text-sm text-[color:var(--ink-muted)]">{event.summary}</p>
+        <p className="mt-2 line-clamp-2 text-sm text-[color:var(--ink-muted)]">{event.summary}</p>
 
-        <div className="mt-3.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[color:var(--ink-muted)]">
+        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs text-[color:var(--ink-muted)]">
           <span className="flex items-center gap-1">
             <Calendar className="h-3.5 w-3.5 flex-none opacity-60" aria-hidden="true" />
             {formatEventDateTime({
@@ -52,7 +52,7 @@ export function EventCard(props: { event: ListedEvent; className?: string }) {
               timezone: event.timezone,
             })}
           </span>
-          <span className="opacity-50">•</span>
+          <span className="opacity-40">·</span>
           <span className="flex items-center gap-1 font-medium text-[color:var(--ink)]">
             {isOnline ? (
               <>
@@ -70,10 +70,10 @@ export function EventCard(props: { event: ListedEvent; className?: string }) {
           </span>
         </div>
 
-        <div className="mt-4 flex items-center justify-between gap-4 border-t border-[color:var(--stroke)] pt-3">
+        <div className="mt-5 flex items-center justify-between gap-4 border-t border-[color:var(--stroke)] pt-4">
           <TagChips tags={event.tagList} />
-          <span className="text-xs text-[color:var(--ink-muted)]">
-            {event._count.rsvps} <span className="text-[color:var(--ink)]">RSVPs</span>
+          <span className="text-xs font-medium text-[color:var(--ink-muted)]">
+            <span className="text-[color:var(--ink)]">{event._count.rsvps}</span> RSVPs
           </span>
         </div>
       </div>

@@ -79,7 +79,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
   }
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 pb-20 pt-8 sm:px-6 lg:px-0">
+    <main className="mx-auto w-full max-w-6xl px-4 pb-20 pt-8 sm:px-6 lg:px-0 has-sticky-attend">
       {/* ─── Ambient background driven by poster colors ─── */}
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         {/* Poster image blurred and tinted — the ambient source */}
@@ -150,6 +150,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             timeLine={timeLine}
             venueType={event.venueType}
             locationText={event.locationText}
+            sticky={true}
           />
 
           {showMap && event.locationText ? (

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { cn } from '@/lib/cn'
 import { RegistrationPanel } from './RegistrationPanel'
 
@@ -12,8 +12,17 @@ export function AttendWebinarCard(props: {
   venueType: 'ONLINE' | 'IN_PERSON' | 'HYBRID'
   locationText?: string | null
   className?: string
+  sticky?: boolean
 }) {
   const [mode, setMode] = useState<'details' | 'form'>('details')
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 640)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const venueLabel = useMemo(() => {
     if (props.venueType === 'ONLINE') return 'Virtual'
@@ -21,8 +30,16 @@ export function AttendWebinarCard(props: {
     return 'Hybrid'
   }, [props.venueType])
 
+  const shouldStick = props.sticky && isMobile
+
   return (
-    <div className={cn('overflow-hidden rounded-[28px] border border-white/10 bg-[color:var(--surface-container-highest)]', props.className)}>
+    <div 
+      className={cn(
+        'overflow-hidden rounded-[28px] border border-white/10 bg-[color:var(--surface-container-highest)]',
+        shouldStick && 'attend-card-sticky',
+        props.className
+      )}
+    >
       {mode === 'details' ? (
         <div className="px-6 pb-6 pt-6">
           <div className="grid grid-cols-3 gap-3">
