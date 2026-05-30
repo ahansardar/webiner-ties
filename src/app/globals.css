@@ -720,12 +720,27 @@ textarea.tv-input {
 
 /* Better touch targets on mobile */
 @media (max-width: 640px) {
-  .tv-btn { min-height: 2.875rem; padding-left: 1.125rem; padding-right: 1.125rem; }
-  .tv-input { height: 3.25rem; font-size: 1rem; border-radius: 0.875rem; }
-  textarea.tv-input { font-size: 1rem; }
+  .tv-btn { 
+    min-height: 48px; 
+    padding-left: 1.25rem; 
+    padding-right: 1.25rem;
+    font-size: 0.95rem;
+  }
+  .tv-btn-primary { 
+    min-height: 52px;
+    padding: 0 1.5rem;
+  }
+  .tv-input { 
+    height: 48px; 
+    font-size: 1rem; 
+    border-radius: 1rem; 
+  }
+  textarea.tv-input { 
+    font-size: 1rem; 
+  }
 
   /* Header logo on small screens */
-  .tv-header-logo { font-size: 1rem; }
+  .tv-header-logo { font-size: 1.1rem; }
 
   /* Hero section smaller padding */
   .tv-hero-pad { padding: 1.75rem !important; }
@@ -737,34 +752,44 @@ textarea.tv-input {
   /* Ticket card smaller padding on mobile */
   .tv-ticket-section { padding: 1.125rem; }
 
-  /* STICKY ATTEND CARD on mobile */
+  /* STICKY ATTEND CARD on mobile - Premium footer */
   .attend-card-sticky {
     position: fixed !important;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 40;
-    border-radius: 0;
-    border: none;
+    border-radius: 0 !important;
+    border: none !important;
     border-top: 1px solid var(--stroke-mid);
-    background: linear-gradient(135deg, rgba(20, 20, 23, 0.98) 0%, rgba(24, 24, 28, 0.95) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    max-height: 60vh;
+    background: linear-gradient(to top, rgba(9,9,11,0.98), rgba(18,18,22,0.96));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    max-height: 90vh;
     overflow-y: auto;
-    animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 1rem;
+    overflow-x: hidden;
+    animation: slide-up-smooth 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    padding: 0 !important;
+  }
+
+  .safe-area-bottom {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
-  @keyframes slide-up {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  @keyframes slide-up-smooth {
+    from { 
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to { 
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 
   /* Add bottom spacing to page content when card is sticky */
   main.has-sticky-attend {
-    padding-bottom: max(320px, 70vh);
+    padding-bottom: max(360px, 80vh);
   }
 }
 
