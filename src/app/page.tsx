@@ -5,6 +5,10 @@ import { CategoryCard } from '@/components/CategoryCard'
 import { FeaturedEventCard } from '@/components/FeaturedEventCard'
 import { categories, featuredEvents } from '@/data/homeDiscover'
 
+// Re-render at most every 60s so new events and RSVP counts show up
+// without a redeploy (the page was previously frozen at build time).
+export const revalidate = 60
+
 export default async function Page() {
   const now = new Date()
   const events = await listEvents({ take: 80 })

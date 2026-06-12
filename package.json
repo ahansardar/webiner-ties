@@ -18,8 +18,8 @@
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1067.0",
     "@libsql/client": "^0.17.3",
-    "@sendgrid/mail": "^8.1.6",
     "clsx": "^2.1.1",
     "date-fns": "^4.3.0",
     "date-fns-tz": "^3.2.0",

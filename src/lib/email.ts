@@ -1,8 +1,8 @@
-import sgMail from '@sendgrid/mail'
+import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses'
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY ?? '')
+const ses = new SESClient({ region: process.env.AWS_REGION ?? 'us-east-1' })
 
-const FROM = process.env.SENDGRID_FROM_EMAIL ?? 'no-reply@tiesverse.com'
+const FROM = process.env.SES_FROM_EMAIL ?? 'no-reply@tiesverse.com'
 
 export async function sendRegistrationConfirmation(params: {
   to: string
@@ -15,7 +15,10 @@ export async function sendRegistrationConfirmation(params: {
   meetingUrl: string | null
   ticketId: string
 }) {
-  if (!process.env.SENDGRID_API_KEY) return
+  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+    console.warn('[email] AWS SES credentials missing — skipping confirmation email')
+    return
+  }
 
   const locationLine =
     params.venueType === 'ONLINE'
@@ -24,11 +27,8 @@ export async function sendRegistrationConfirmation(params: {
         : 'Online event — meeting link will be shared soon.'
       : params.locationText ?? 'Venue details will be shared soon.'
 
-  const msg = {
-    to: { email: params.to, name: params.toName },
-    from: FROM,
-    subject: `You're registered: ${params.eventTitle}`,
-    text: [
+  const subject = `You're registered: ${params.eventTitle}`
+  const text = [
       `Hi ${params.toName},`,
       ``,
       `You're officially registered for ${params.eventTitle}.`,
@@ -41,8 +41,9 @@ export async function sendRegistrationConfirmation(params: {
       ``,
       `See you there!`,
       `— Tiesverse Team`,
-    ].join('\n'),
-    html: `
+    ].join('\n')
+
+  const html = `
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><title>Registration Confirmed</title></head>
@@ -96,11 +97,22 @@ export async function sendRegistrationConfirmation(params: {
     </td></tr>
   </table>
 </body>
-</html>`,
-  }
+</html>`
 
   try {
-    await sgMail.send(msg)
+    await ses.send(
+      new SendEmailCommand({
+        Source: FROM,
+        Destination: { ToAddresses: [params.to] },
+        Message: {
+          Subject: { Data: subject, Charset: 'UTF-8' },
+          Body: {
+            Text: { Data: text, Charset: 'UTF-8' },
+            Html: { Data: html, Charset: 'UTF-8' },
+          },
+        },
+      }),
+    )
   } catch (err) {
     console.error('[email] failed to send registration confirmation:', err)
   }
