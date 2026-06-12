@@ -9,12 +9,15 @@ All core colors are CSS variables defined in:
 
 - `src/app/globals.css`
 
-Key tokens:
+The palette mirrors the main Tiesverse website (`tiesversewebsite.vercel.app`),
+a light editorial system. Key tokens:
 
-- `--brand` / `--brand-600` / `--brand-700`: the orange accent and hover states
-- `--paper` / `--paper-muted`: page surfaces (cards, sections)
-- `--ink` / `--ink-muted`: text colors
-- `--stroke` / `--stroke-strong`: borders and dividers
+- `--paper` (#fffaf2) / `--cream` (#fff3e3): warm cream page surfaces
+- `--ink` (#1d160d) / `--ink-muted`: warm near-black text colors
+- `--accent` (#fe7a00) / `--accent-d` (#e56d00): Tiesverse orange and hover state
+- `--rule` (#ecdfcd) / `--stroke-mid` / `--stroke-strong`: warm hairline borders
+- `--radius` (4px): editorial button/card corner radius
+- `--dark` / `--on-dark`: near-black bands with cream text (contrast sections)
 
 Rule of thumb:
 
@@ -27,10 +30,10 @@ Fonts are configured in:
 
 - `src/app/layout.tsx`
 
-This app uses:
+This app uses (matching the main Tiesverse website):
 
-- Body font: `Inter` (variable `--font-body`)
-- Display font: `Bebas Neue` (variable `--font-display`)
+- Body font: `Manrope` (variable `--font-body`)
+- Display font: `Fraunces` serif, weight 400, letter-spacing -0.03em (variable `--font-display`)
 
 To change typography:
 
