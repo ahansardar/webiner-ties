@@ -33,7 +33,7 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Registration trend chart */}
-      <div className="mb-8 rounded-2xl border border-white/08 bg-[color:var(--card)] p-6">
+      <div className="mb-8 rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-6">
         <h2 className="mb-4 text-sm font-semibold text-[color:var(--ink)]">Registrations — last 30 days</h2>
         {trend.length ? (
           <MiniBarChart data={trend} />
@@ -43,8 +43,8 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Recent registrations */}
-      <div className="rounded-2xl border border-white/08 bg-[color:var(--card)]">
-        <div className="flex items-center justify-between border-b border-white/06 px-6 py-4">
+      <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)]">
+        <div className="flex items-center justify-between border-b border-[color:var(--rule)] px-6 py-4">
           <h2 className="text-sm font-semibold text-[color:var(--ink)]">Recent registrations</h2>
           <Link href="/admin/events" className="text-xs text-[color:var(--ink-muted)] hover:text-[color:var(--ink)]">
             View all events
@@ -56,7 +56,7 @@ export default async function AdminDashboard() {
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/05">
+              <tr className="border-b border-[color:var(--rule)]">
                 <Th>Name</Th>
                 <Th>Email</Th>
                 <Th>Event</Th>
@@ -66,7 +66,7 @@ export default async function AdminDashboard() {
             </thead>
             <tbody>
               {recent.map((r) => (
-                <tr key={r.ticketId} className="border-b border-white/04 last:border-0 hover:bg-white/02">
+                <tr key={r.ticketId} className="border-b border-[color:var(--rule)] last:border-0 hover:bg-[rgba(29,22,13,0.04)]">
                   <Td>{r.fullName}</Td>
                   <Td className="text-[color:var(--ink-muted)]">{r.email}</Td>
                   <Td>
@@ -93,7 +93,7 @@ export default async function AdminDashboard() {
 
 function StatCard({ label, value, accent }: { label: string; value: number; accent?: boolean }) {
   return (
-    <div className="rounded-2xl border border-white/08 bg-[color:var(--card)] p-5">
+    <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-5">
       <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--ink-muted)]">{label}</p>
       <p className={`mt-2 text-3xl font-bold ${accent ? 'text-[color:var(--ink-highlight)]' : 'text-[color:var(--ink)]'}`}>
         {value.toLocaleString()}

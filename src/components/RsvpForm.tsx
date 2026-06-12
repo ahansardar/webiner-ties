@@ -67,7 +67,7 @@ export function RsvpForm(props: { eventSlug: string }) {
     <div className="rsvp-simple-card">
       {/* Header */}
       <div className="mb-5 flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--accent-dim)]">
+        <div className="flex h-9 w-9 items-center justify-center rounded-[var(--radius)] bg-[color:var(--accent-dim)]">
           <span className="material-symbols-outlined text-[18px] text-[color:var(--accent)]">event_available</span>
         </div>
         <div>

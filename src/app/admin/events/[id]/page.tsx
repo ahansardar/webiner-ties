@@ -30,7 +30,7 @@ export default async function AdminEventDetailPage(props: { params: Promise<{ id
         </Link>
         <h1 className="flex-1 text-2xl font-semibold text-[color:var(--ink)] truncate">{event.title}</h1>
         {!event.isPublished && (
-          <span className="rounded px-2 py-0.5 text-xs font-semibold bg-white/05 text-[color:var(--ink-muted)]">DRAFT</span>
+          <span className="rounded px-2 py-0.5 text-xs font-semibold bg-[rgba(29,22,13,0.04)] text-[color:var(--ink-muted)]">DRAFT</span>
         )}
       </div>
 
@@ -64,7 +64,7 @@ export default async function AdminEventDetailPage(props: { params: Promise<{ id
       </div>
 
       {byDay.length > 0 && (
-        <div className="mb-6 rounded-2xl border border-white/08 bg-[color:var(--card)] p-6">
+        <div className="mb-6 rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-6">
           <h3 className="mb-4 text-xs font-semibold uppercase tracking-wide text-[color:var(--ink-muted)]">
             Sign-ups over time
           </h3>
@@ -72,7 +72,7 @@ export default async function AdminEventDetailPage(props: { params: Promise<{ id
         </div>
       )}
 
-      <div className="rounded-2xl border border-white/08 bg-[color:var(--card)] overflow-hidden">
+      <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] overflow-hidden">
         {registrants.length === 0 ? (
           <p className="px-6 py-10 text-sm text-[color:var(--ink-muted)]">No registrations yet.</p>
         ) : (
@@ -85,7 +85,7 @@ export default async function AdminEventDetailPage(props: { params: Promise<{ id
 
 function MiniStat({ label, value, accent }: { label: string; value: string | number; accent?: boolean }) {
   return (
-    <div className="rounded-2xl border border-white/08 bg-[color:var(--card)] p-4">
+    <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-4">
       <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--ink-muted)]">{label}</p>
       <p className={`mt-1 text-xl font-bold ${accent ? 'text-[color:var(--ink-highlight)]' : 'text-[color:var(--ink)]'}`}>
         {value}

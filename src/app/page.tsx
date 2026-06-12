@@ -1,13 +1,22 @@
 import Link from 'next/link'
 import { listEvents } from '@/server/events'
+import { getSupabaseWebinars } from '@/server/supabaseEvents'
 import { EventCard } from '@/components/EventCard'
+import { SupabaseEventCard } from '@/components/SupabaseEventCard'
 import { CategoryCard } from '@/components/CategoryCard'
 import { FeaturedEventCard } from '@/components/FeaturedEventCard'
 import { categories, featuredEvents } from '@/data/homeDiscover'
 
+// Re-render at most every 60s so new events and RSVP counts show up
+// without a redeploy (the page was previously frozen at build time).
+export const revalidate = 60
+
 export default async function Page() {
   const now = new Date()
-  const events = await listEvents({ take: 80 })
+  const [events, supabaseItems] = await Promise.all([
+    listEvents({ take: 80 }),
+    getSupabaseWebinars().catch(() => []),
+  ])
 
   const upcoming = events
     .filter((event) => new Date(event.startAt).getTime() >= now.getTime())
@@ -26,19 +35,13 @@ export default async function Page() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-0">
-      <section className="mb-14 overflow-hidden rounded-[32px] border border-white/08 bg-[color:var(--card)]" style={{boxShadow:'0 1px 0 rgba(255,255,255,0.05) inset, 0 32px 80px rgba(0,0,0,0.45)'}}>
+      <section className="mb-14 overflow-hidden rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--cream)]">
         <div className="relative p-8 sm:p-14">
-          {/* Multi-layer ambient glow */}
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_65%_at_20%_-10%,rgba(228,213,160,0.12),transparent_60%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_80%_110%,rgba(120,100,200,0.06),transparent_60%)]" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          </div>
-
           <div className="relative">
-            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-[color:var(--ink)] sm:text-6xl">
+            <p className="tv-section-label mb-5">Webinars &amp; Events</p>
+            <h1 className="tv-display max-w-3xl text-5xl text-[color:var(--ink)] sm:text-7xl">
               Webinars &amp; events by{' '}
-              <span className="tv-highlight">.tiesverse</span>
+              <span className="tv-ital text-[color:var(--accent)]">.tiesverse</span>
             </h1>
             <p className="mt-5 max-w-2xl text-[17px] leading-relaxed text-[color:var(--ink-muted)] sm:text-lg">
               Find what&apos;s next. RSVP fast. Show up with a friendly crowd.
@@ -66,7 +69,7 @@ export default async function Page() {
       <section className="mb-14">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="text-lg font-semibold text-[color:var(--ink)]">Upcoming</h2>
+            <h2 className="tv-display text-2xl text-[color:var(--ink)]">Upcoming</h2>
             <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Pick a session and grab your spot.</p>
           </div>
           <Link href="/discover" className="text-sm font-medium text-[color:var(--ink-muted)] hover:text-[color:var(--ink)]">
@@ -78,7 +81,7 @@ export default async function Page() {
           {upcoming.length ? (
             upcoming.map((event) => <EventCard key={event.id} event={event} />)
           ) : (
-            <div className="rounded-2xl border border-white/10 bg-[color:var(--card)] p-6 text-sm text-[color:var(--ink-muted)]">
+            <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-6 text-sm text-[color:var(--ink-muted)]">
               No upcoming events yet.
             </div>
           )}
@@ -88,7 +91,7 @@ export default async function Page() {
       <section className="mb-14">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="text-lg font-semibold text-[color:var(--ink)]">Live now</h2>
+            <h2 className="tv-display text-2xl text-[color:var(--ink)]">Live now</h2>
             <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Join while it’s happening.</p>
           </div>
           <Link href="/discover" className="text-sm font-medium text-[color:var(--ink-muted)] hover:text-[color:var(--ink)]">
@@ -100,17 +103,33 @@ export default async function Page() {
           {live.length ? (
             live.map((event) => <EventCard key={`live-${event.id}`} event={event} />)
           ) : (
-            <div className="rounded-2xl border border-white/10 bg-[color:var(--card)] p-6 text-sm text-[color:var(--ink-muted)]">
+            <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-6 text-sm text-[color:var(--ink-muted)]">
               No live events right now.
             </div>
           )}
         </div>
       </section>
 
+      {supabaseItems.length > 0 && (
+        <section className="mb-14">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="tv-display text-2xl text-[color:var(--ink)]">Workshops &amp; Events</h2>
+              <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Sessions from our full collection.</p>
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {supabaseItems.slice(0, 6).map((item) => (
+              <SupabaseEventCard key={`${item.source}-${item.id}`} item={item} />
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="mb-14">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="text-lg font-semibold text-[color:var(--ink)]">Browse by category</h2>
+            <h2 className="tv-display text-2xl text-[color:var(--ink)]">Browse by category</h2>
             <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Tap a category to filter events.</p>
           </div>
           <Link href="/discover" className="text-sm font-medium text-[color:var(--ink-muted)] hover:text-[color:var(--ink)]">
@@ -128,7 +147,7 @@ export default async function Page() {
       <section className="mb-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="text-lg font-semibold text-[color:var(--ink)]">Featured events</h2>
+            <h2 className="tv-display text-2xl text-[color:var(--ink)]">Featured events</h2>
             <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Handpicked sessions worth bookmarking.</p>
           </div>
           <Link href="/discover" className="text-sm font-medium text-[color:var(--ink-muted)] hover:text-[color:var(--ink)]">
@@ -145,14 +164,14 @@ export default async function Page() {
 
       <section className="mb-10">
         <div>
-          <h2 className="text-lg font-semibold text-[color:var(--ink)]">Recently hosted</h2>
+          <h2 className="tv-display text-2xl text-[color:var(--ink)]">Recently hosted</h2>
           <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Missed one? Catch the recap on the event page.</p>
         </div>
         <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {recent.length ? (
             recent.map((event) => <EventCard key={event.id} event={event} />)
           ) : (
-            <div className="rounded-2xl border border-white/10 bg-[color:var(--card)] p-6 text-sm text-[color:var(--ink-muted)]">
+            <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-6 text-sm text-[color:var(--ink-muted)]">
               Past events will appear here.
             </div>
           )}

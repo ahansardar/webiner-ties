@@ -35,7 +35,7 @@ export function RegistrantsTable({ registrants }: { registrants: Registrant[] })
 
   return (
     <div>
-      <div className="border-b border-white/06 px-6 py-3">
+      <div className="border-b border-[color:var(--rule)] px-6 py-3">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -47,7 +47,7 @@ export function RegistrantsTable({ registrants }: { registrants: Registrant[] })
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/05">
+            <tr className="border-b border-[color:var(--rule)]">
               <Th>#</Th>
               <Th>Name</Th>
               <Th>Email</Th>
@@ -71,7 +71,7 @@ export function RegistrantsTable({ registrants }: { registrants: Registrant[] })
                 <>
                   <tr
                     key={r.id}
-                    className="border-b border-white/04 last:border-0 hover:bg-white/02 cursor-pointer"
+                    className="border-b border-[color:var(--rule)] last:border-0 hover:bg-[rgba(29,22,13,0.04)] cursor-pointer"
                     onClick={() => setExpanded(expanded === r.id ? null : r.id)}
                   >
                     <Td className="text-[color:var(--ink-muted)]">{i + 1}</Td>
@@ -87,7 +87,7 @@ export function RegistrantsTable({ registrants }: { registrants: Registrant[] })
                     </Td>
                   </tr>
                   {expanded === r.id && (
-                    <tr key={`${r.id}-expanded`} className="bg-white/02 border-b border-white/04">
+                    <tr key={`${r.id}-expanded`} className="bg-[rgba(29,22,13,0.04)] border-b border-[color:var(--rule)]">
                       <td colSpan={9} className="px-6 py-4">
                         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                           <Detail label="How they heard" value={r.heard_from} />

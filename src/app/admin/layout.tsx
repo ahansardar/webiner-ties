@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen" style={{ background: 'var(--background)' }}>
-      <nav className="border-b border-white/08 bg-[color:var(--card)]">
+      <nav className="border-b border-[color:var(--rule)] bg-[color:var(--card)]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
           <div className="flex items-center gap-6">
             <Link href="/admin" className="flex items-center gap-2">
               <span className="font-semibold text-[color:var(--ink-highlight)]">Tiesverse</span>
-              <span className="rounded bg-white/08 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--ink-muted)]">
+              <span className="rounded bg-[rgba(29,22,13,0.04)] px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--ink-muted)]">
                 Admin
               </span>
             </Link>
@@ -36,7 +36,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link
       href={href}
-      className="rounded-lg px-3 py-1.5 text-sm font-medium text-[color:var(--ink-muted)] transition-colors hover:bg-white/06 hover:text-[color:var(--ink)]"
+      className="rounded-[var(--radius)] px-3 py-1.5 text-sm font-medium text-[color:var(--ink-muted)] transition-colors hover:bg-[rgba(29,22,13,0.04)] hover:text-[color:var(--ink)]"
     >
       {children}
     </Link>

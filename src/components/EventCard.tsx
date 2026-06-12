@@ -13,9 +13,9 @@ export function EventCard(props: { event: ListedEvent; className?: string }) {
   return (
     <Link
       href={`/events/${event.slug}`}
-      className={cn('tv-card tv-card-hover group block rounded-[24px] p-5', props.className)}
+      className={cn('tv-card tv-card-hover group block rounded-[var(--radius)] p-5', props.className)}
     >
-      <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-[18px] border border-white/10 bg-[color:var(--card-hover)]">
+      <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card-hover)]">
         {event.coverImageUrl ? (
           <Image
             alt={event.title}

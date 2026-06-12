@@ -25,7 +25,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
   if (!event) {
     return (
       <main className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-0">
-        <h1 className="text-3xl font-semibold tracking-tight text-[color:var(--ink)]">
+        <h1 className="tv-display text-3xl text-[color:var(--ink)]">
           Webinar not found
         </h1>
         <p className="mt-4 text-[16px] text-[color:var(--ink-muted)]">
@@ -80,28 +80,9 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 pb-20 pt-8 sm:px-6 lg:px-0">
-      {/* ─── Ambient background driven by poster colors ─── */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        {/* Poster image blurred and tinted — the ambient source */}
-        <Image
-          alt=""
-          src={event.coverImageUrl ?? fallbackCover}
-          fill
-          className="object-cover blur-[80px] opacity-20 saturate-200 scale-110"
-          sizes="100vw"
-          priority={false}
-        />
-        {/* Dark overlay with warm crown glow at top */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090b]/60 via-[#09090b]/80 to-[#09090b]/97" />
-        {/* Warm gold top accent — matches brand */}
-        <div className="absolute inset-x-0 top-0 h-[380px] bg-[radial-gradient(ellipse_90%_55%_at_50%_-10%,rgba(228,213,160,0.11),transparent_65%)]" />
-        {/* Soft edge vignette */}
-        <div className="absolute inset-0 shadow-[inset_0_0_120px_40px_rgba(9,9,11,0.85)]" />
-      </div>
-
       <div className="grid grid-cols-12 items-start gap-6">
         <div className="col-span-12 md:col-span-8">
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[28px] border border-white/10 bg-[color:var(--card)]">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)]">
             <Image
               alt={event.title}
               src={event.coverImageUrl ?? fallbackCover}
@@ -112,17 +93,17 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             />
           </div>
 
-          <div className="mt-6 rounded-[28px] border border-white/8 bg-[color:var(--card)]/90 p-6 backdrop-blur-sm">
+          <div className="mt-6 rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)]/90 p-6 backdrop-blur-sm">
             <p className="tv-label">{event.tagList[0]?.toUpperCase() ?? 'WEBINAR'}</p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[color:var(--ink)] sm:text-5xl">
+            <h1 className="tv-display mt-3 text-3xl text-[color:var(--ink)] sm:text-5xl">
               {event.title}
             </h1>
             <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-[color:var(--ink-muted)]">
-              <span className="inline-flex items-center gap-2 rounded-lg border border-white/07 bg-white/04 px-3 py-1.5">
+              <span className="inline-flex items-center gap-2 rounded-[var(--radius)] border border-[color:var(--rule)] bg-[rgba(29,22,13,0.04)] px-3 py-1.5">
                 <span className="material-symbols-outlined text-[16px] text-[color:var(--accent)]">event</span>
                 {dateLine}
               </span>
-              <span className="inline-flex items-center gap-2 rounded-lg border border-white/07 bg-white/04 px-3 py-1.5">
+              <span className="inline-flex items-center gap-2 rounded-[var(--radius)] border border-[color:var(--rule)] bg-[rgba(29,22,13,0.04)] px-3 py-1.5">
                 <span className="material-symbols-outlined text-[16px] text-[color:var(--accent)]">schedule</span>
                 {timeLine}
               </span>
@@ -137,7 +118,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
                 name: event.organizer.name.toUpperCase(),
                 title: `HOST, ${event.organizer.name.toUpperCase()}`,
               }}
-              className="tv-card rounded-[28px] p-6"
+              className="tv-card rounded-[var(--radius)] p-6"
             />
           </div>
         </div>
@@ -153,7 +134,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
           />
 
           {showMap && event.locationText ? (
-            <div className="rounded-[28px] border border-white/10 bg-[color:var(--card)] p-4">
+            <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-4">
               <h5 className="mb-3 flex items-center gap-2 text-sm font-semibold text-[color:var(--ink)]">
                 <span className="material-symbols-outlined text-[16px]">location_on</span>
                 Location
@@ -168,7 +149,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             </div>
           ) : null}
 
-          <div className="rounded-[28px] border border-white/10 bg-[color:var(--card)] p-4">
+          <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-4">
             <h5 className="mb-3 flex items-center gap-2 text-sm font-semibold text-[color:var(--ink)]">
               <span className="material-symbols-outlined text-[16px]">group</span>
               Attendees
@@ -181,7 +162,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
                       <div
                         key={`${a.createdAt}-${a.fullName}`}
                         title={a.fullName}
-                        className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-[color:var(--surface-container-high)] text-[11px] font-semibold text-[color:var(--ink)]"
+                        className="grid h-8 w-8 place-items-center rounded-full border border-[color:var(--rule)] bg-[color:var(--surface-container-high)] text-[11px] font-semibold text-[color:var(--ink)]"
                       >
                         {attendeeInitials(a.fullName)}
                       </div>
@@ -196,7 +177,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
                   {attendees.slice(0, 10).map((a) => (
                     <div
                       key={`row-${a.createdAt}-${a.fullName}`}
-                      className="flex items-center justify-between rounded-2xl border border-white/10 bg-[color:var(--card)] px-3 py-2"
+                      className="flex items-center justify-between rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] px-3 py-2"
                     >
                       <div className="min-w-0 text-sm font-medium text-[color:var(--ink)]">
                         <span className="truncate">{a.fullName}</span>
@@ -207,7 +188,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
                 </div>
               </>
             ) : (
-              <div className="rounded-2xl border border-white/10 bg-[color:var(--surface-container-highest)] p-4 text-sm text-[color:var(--ink-muted)]">
+              <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--surface-container-highest)] p-4 text-sm text-[color:var(--ink-muted)]">
                 Be the first to RSVP.
               </div>
             )}
@@ -215,15 +196,15 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
         </aside>
       </div>
 
-      <section className="mt-10 border-t border-white/10 pt-10">
-        <h2 className="mb-10 text-xl font-semibold text-[color:var(--ink)]">
+      <section className="mt-10 border-t border-[color:var(--rule)] pt-10">
+        <h2 className="tv-display mb-10 text-2xl text-[color:var(--ink)]">
           Upcoming Webinars
         </h2>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {upcoming.map((item) => (
             <Link key={item.slug} href={`/events/${item.slug}`} className="group">
-              <div className="relative mb-4 aspect-video overflow-hidden rounded-[22px] border border-white/10 bg-[color:var(--card)]">
+              <div className="relative mb-4 aspect-video overflow-hidden rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)]">
                 <Image
                   alt={item.title}
                   src={item.coverImageUrl ?? fallbackCover}

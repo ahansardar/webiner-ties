@@ -1,324 +1,110 @@
 @import 'tailwindcss';
 
 /* ═══════════════════════════════════════════════
-   TIESVERSE — WARM DARK PREMIUM
+   TIESVERSE — PLUM-EXACT EDITORIAL SYSTEM
+   Tokens from Tiesverse-Website base.css:
+   bg #fffaf2, ink #1d160d, accent #fe7a00,
+   headings Fraunces (lh 1.0, ls -0.03em, wt 400),
+   body Manrope, buttons radius 4px.
    ═══════════════════════════════════════════════ */
 :root {
   /* Base */
-  --background: #09090b;
-  --surface: #09090b;
-  --card: #141417;
-  --card-hover: #1e1e24;
-  --card-active: #1e1e24;
+  --paper: #fffaf2;        /* warm cream page bg */
+  --cream: #fff3e3;        /* deeper cream band */
+  --background: var(--paper);
+  --surface: var(--paper);
+  --card: #ffffff;
+  --card-hover: #fffdf9;
+  --card-active: #fffdf9;
 
-  /* Strokes */
-  --stroke: rgba(255, 255, 255, 0.07);
-  --stroke-mid: rgba(255, 255, 255, 0.12);
-  --stroke-strong: rgba(255, 255, 255, 0.20);
+  /* Strokes — warm hairlines */
+  --rule: #ecdfcd;
+  --stroke: var(--rule);
+  --stroke-mid: #e0d0b9;
+  --stroke-strong: #c9b89e;
 
   /* Ink */
-  --ink: #f0f0f4;
-  --ink-muted: #71717a;
-  --ink-subtle: rgba(240, 240, 244, 0.35);
-  --ink-highlight: #e4d5a0;
+  --ink: #1d160d;          /* warm near-black */
+  --ink-2: #2a2014;
+  --ink-muted: rgba(29, 22, 13, 0.6);
+  --ink-subtle: rgba(29, 22, 13, 0.38);
+  --ink-highlight: #fe7a00;
 
-  /* Accent — warm gold */
-  --accent: #e4d5a0;
-  --accent-2: #e4d5a0;
-  --accent-dim: rgba(228, 213, 160, 0.10);
-  --accent-glow: rgba(228, 213, 160, 0.16);
-  --accent-border: rgba(228, 213, 160, 0.25);
+  /* Accent — Tiesverse orange */
+  --accent: #fe7a00;
+  --accent-2: #e56d00;
+  --accent-d: #e56d00;
+  --accent-dim: rgba(254, 122, 0, 0.09);
+  --accent-glow: rgba(254, 122, 0, 0.16);
+  --accent-border: rgba(254, 122, 0, 0.30);
+
+  /* Dark sections (cream-on-black bands) */
+  --dark: #15140f;
+  --dark-2: #0c0b08;
+  --dark-3: #211f1a;
+  --on-dark: #fff3e6;
+  --on-dark-soft: rgba(255, 243, 230, 0.62);
 
   /* Backwards compat */
   --brand:              var(--accent);
   --brand-orange:       var(--accent);
-  --brand-600: #e4d5a0;
-  --brand-700: #e4d5a0;
+  --brand-600: #e56d00;
+  --brand-700: #cc6100;
   --primary:            var(--accent);
   --primary-container:  var(--accent-dim);
-  --on-primary:         #09090b;
+  --on-primary:         #ffffff;
 
   --on-background:           var(--ink);
   --on-surface:              var(--ink);
   --on-surface-variant:      var(--ink-muted);
-  --surface-container-low: #141417;
-  --surface-container-high: #1e1e24;
-  --surface-container-highest: #18181c;
-  --secondary-container: rgba(228, 213, 160, 0.10);
-  --on-secondary-fixed: rgba(240, 240, 244, 0.9);
-  --outline-editorial: rgba(255, 255, 255, 0.04);
-  --outline: rgba(255, 255, 255, 0.08);
+  --surface-container-low: #ffffff;
+  --surface-container-high: var(--cream);
+  --surface-container-highest: #f8eedd;
+  --secondary-container: rgba(254, 122, 0, 0.09);
+  --on-secondary-fixed: rgba(29, 22, 13, 0.9);
+  --outline-editorial: rgba(29, 22, 13, 0.05);
+  --outline: var(--rule);
 
-  --paper:       var(--background);
-  --paper-muted: var(--card);
+  --paper-muted: var(--cream);
   --stroke-strong-alias: var(--stroke-strong);
-}
 
-/* ═══════════════════════════════════════════════
-   CAPPUCCINO LIGHT THEME
-   ═══════════════════════════════════════════════ */
-[data-theme="light"] {
-  --background: #f5ede0;
-  --surface:    #f5ede0;
-  --card:       #fdf9f3;
-  --card-hover: #fffcf7;
-  --card-active:#fffcf7;
-
-  --stroke:       rgba(0, 0, 0, 0.07);
-  --stroke-mid:   rgba(0, 0, 0, 0.11);
-  --stroke-strong:rgba(0, 0, 0, 0.20);
-
-  --ink:          #1c1a16;
-  --ink-muted:    #7a6f60;
-  --ink-subtle:   rgba(28, 26, 22, 0.35);
-  --ink-highlight:#9c7a14;
-
-  --accent:        #9c7a14;
-  --accent-2:      #9c7a14;
-  --accent-dim:    rgba(156, 122, 20, 0.09);
-  --accent-glow:   rgba(156, 122, 20, 0.16);
-  --accent-border: rgba(156, 122, 20, 0.28);
-
-  --brand:             var(--accent);
-  --brand-orange:      var(--accent);
-  --brand-600:         #9c7a14;
-  --brand-700:         #9c7a14;
-  --primary:           var(--accent);
-  --primary-container: var(--accent-dim);
-  --on-primary:        #fdfaf5;
-
-  --on-background:            var(--ink);
-  --on-surface:               var(--ink);
-  --on-surface-variant:       var(--ink-muted);
-  --surface-container-low:    #fdf9f3;
-  --surface-container-high:   #ede5d6;
-  --surface-container-highest:#e8e0d0;
-  --secondary-container:      rgba(156, 122, 20, 0.09);
-  --on-secondary-fixed:       rgba(28, 26, 22, 0.9);
-  --outline-editorial:        rgba(0, 0, 0, 0.04);
-  --outline:                  rgba(0, 0, 0, 0.08);
-
-  --paper:              var(--background);
-  --paper-muted:        var(--card);
-  --stroke-strong-alias:var(--stroke-strong);
-}
-
-/* Light theme body background — warm cappuccino glow */
-html[data-theme="light"] body::before {
-  background:
-    radial-gradient(ellipse 110% 55% at 50% -12%, rgba(156, 122, 20, 0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 60% at -5% 30%,   rgba(210, 170, 100, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 55% at 105% 20%,  rgba(200, 160, 110, 0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(230, 210, 180, 0.30) 0%, transparent 55%),
-    linear-gradient(to bottom, #f8f0e2 0%, #f5ede0 60%);
-}
-
-/* Light theme film grain — much more subtle */
-html[data-theme="light"] body::after { opacity: 0.025; }
-
-/* Light theme header */
-html[data-theme="light"] header {
-  background: rgba(245, 237, 224, 0.88) !important;
-  border-bottom-color: rgba(0, 0, 0, 0.07) !important;
-}
-
-html[data-theme="light"] header .absolute.inset-x-0.top-0 {
-  background: linear-gradient(to right, transparent, rgba(156,122,20,0.25), transparent) !important;
-}
-
-/* Nav link hover — override white-tinted tailwind class on light bg */
-html[data-theme="light"] header nav a:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Light theme buttons */
-html[data-theme="light"] .tv-btn {
-  border-color: rgba(0, 0, 0, 0.10);
-  background: rgba(0, 0, 0, 0.04);
-  color: var(--ink);
-}
-html[data-theme="light"] .tv-btn:hover {
-  background: rgba(0, 0, 0, 0.07);
-  border-color: rgba(0, 0, 0, 0.16);
-}
-html[data-theme="light"] .tv-btn-primary {
-  background: var(--accent);
-  color: #fdfaf5;
-  box-shadow: 0 2px 12px rgba(156, 122, 20, 0.25);
-}
-html[data-theme="light"] .tv-btn-primary:hover {
-  background: color-mix(in oklab, var(--accent), black 8%);
-  box-shadow: 0 4px 20px rgba(156, 122, 20, 0.35);
-}
-
-/* Light theme inputs */
-html[data-theme="light"] .tv-input {
-  border-color: rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.70);
-  color: var(--ink);
-}
-html[data-theme="light"] .tv-input:hover {
-  border-color: rgba(0, 0, 0, 0.18);
-  background: rgba(255, 255, 255, 0.85);
-}
-html[data-theme="light"] .tv-input:focus {
-  border-color: rgba(156, 122, 20, 0.40);
-  box-shadow: 0 0 0 3px rgba(156, 122, 20, 0.09), inset 0 1px 0 rgba(255,255,255,0.6);
-  background: rgba(255, 255, 255, 0.95);
-}
-html[data-theme="light"] .tv-input::placeholder { color: rgba(122, 111, 96, 0.60); }
-
-/* Light theme surface */
-html[data-theme="light"] .tv-surface {
-  border-color: rgba(0, 0, 0, 0.07);
-  background: rgba(253, 249, 243, 0.92);
-}
-html[data-theme="light"] .tv-surface-muted {
-  background: var(--card);
-  border-color: var(--stroke);
-}
-
-/* Light theme card shadows */
-html[data-theme="light"] .tv-card-hover:hover,
-html[data-theme="light"] .tv-card.tv-interactive:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(0, 0, 0, 0.08);
-}
-
-/* Light theme glow card */
-html[data-theme="light"] .tv-card-glow {
-  border-color: rgba(156, 122, 20, 0.22);
-  background: linear-gradient(135deg, rgba(156, 122, 20, 0.05) 0%, var(--card) 55%);
-}
-
-/* Light theme pills */
-html[data-theme="light"] .tv-pill {
-  border-color: rgba(0, 0, 0, 0.10);
-  background: rgba(0, 0, 0, 0.035);
-  color: var(--ink-muted);
-}
-
-/* Light theme selection */
-html[data-theme="light"] ::selection {
-  background: rgba(156, 122, 20, 0.18);
-  color: var(--ink);
-}
-
-/* Light theme scrollbar */
-html[data-theme="light"] .tv-scrollbar {
-  scrollbar-color: rgba(156, 122, 20, 0.25) transparent;
-}
-html[data-theme="light"] .tv-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(156, 122, 20, 0.20);
-}
-
-/* Light theme RSVP panel */
-html[data-theme="light"] .rsvp-panel {
-  background: linear-gradient(135deg, rgba(253,249,243,0.98) 0%, rgba(248,242,232,0.96) 100%);
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.12), 0 1px 0 rgba(255,255,255,0.8) inset;
-}
-html[data-theme="light"] .rsvp-steps {
-  border-bottom-color: rgba(0, 0, 0, 0.08);
-  background: rgba(0, 0, 0, 0.03);
-}
-html[data-theme="light"] .rsvp-step-btn:not(:last-child) {
-  border-right-color: rgba(0, 0, 0, 0.08);
-}
-html[data-theme="light"] .rsvp-step-num {
-  background: rgba(0, 0, 0, 0.07);
-  color: var(--ink-muted);
-}
-html[data-theme="light"] .rsvp-step-btn.active .rsvp-step-num {
-  background: var(--accent);
-  color: #fdfaf5;
-}
-
-/* Light theme simple rsvp card */
-html[data-theme="light"] .rsvp-simple-card {
-  background: linear-gradient(135deg, rgba(156,122,20,0.04) 0%, rgba(253,249,243,0.99) 100%);
-  border-color: rgba(156, 122, 20, 0.16);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(156,122,20,0.05) inset;
-}
-
-/* Light theme shimmer */
-html[data-theme="light"] .tv-shimmer {
-  background: linear-gradient(90deg,
-    rgba(0,0,0,0.03) 0%,
-    rgba(0,0,0,0.06) 40%,
-    rgba(0,0,0,0.03) 80%);
+  --radius: 4px;           /* Plum button/card radius */
+  --ease: cubic-bezier(.22, 1, .36, 1);
 }
 
 /* ═══════════════════════════════════════════════
    BASE
    ═══════════════════════════════════════════════ */
 html, body { height: 100%; }
+html { scroll-behavior: smooth; text-rendering: optimizeLegibility; }
 
 body {
-  background-color: var(--background);
+  background-color: var(--paper);
   color: var(--ink);
-  font-family: var(--font-body), 'Inter', ui-sans-serif, system-ui, -apple-system;
+  font-family: var(--font-body), 'Manrope', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Rich background: animated aurora + grain ─── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    /* Warm gold crown at top */
-    radial-gradient(ellipse 110% 55% at 50% -12%, rgba(228, 213, 160, 0.13) 0%, transparent 65%),
-    /* Left-side warm blush */
-    radial-gradient(ellipse 70% 60% at -5% 30%, rgba(200, 160, 120, 0.07) 0%, transparent 60%),
-    /* Right-side cool tone */
-    radial-gradient(ellipse 70% 55% at 105% 20%, rgba(120, 100, 200, 0.06) 0%, transparent 60%),
-    /* Deep bottom fade */
-    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(0, 0, 0, 0.90) 0%, transparent 55%),
-    /* Base dark */
-    linear-gradient(to bottom, #0d0d11 0%, #09090b 60%);
-  animation: aurora-drift 20s ease-in-out infinite alternate;
-}
-
-@keyframes aurora-drift {
-  0%   { opacity: 1; transform: scale(1) translateY(0px); }
-  50%  { opacity: 0.88; transform: scale(1.008) translateY(-4px); }
-  100% { opacity: 1; transform: scale(1) translateY(0px); }
-}
-
-/* Film grain overlay */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  opacity: 0.04;
-}
-
-/* All page content must sit above ::before/::after */
-body > * { position: relative; z-index: 1; }
-
 ::selection {
-  background: rgba(228, 213, 160, 0.20);
-  color: var(--ink);
+  background: var(--accent);
+  color: #fff;
 }
 
 ::placeholder {
-  color: rgba(113, 113, 122, 0.7);
+  color: var(--ink-subtle);
 }
 
 .tv-highlight {
-  color: var(--ink-highlight);
+  color: var(--accent);
 }
 
 :focus-visible {
-  outline: 2px solid rgba(228, 213, 160, 0.45);
-  outline-offset: 2px;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -327,8 +113,8 @@ body > * { position: relative; z-index: 1; }
 .tv-label {
   display: block;
   font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
@@ -336,9 +122,9 @@ body > * { position: relative; z-index: 1; }
 .tv-input {
   height: 3rem;
   width: 100%;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  background: #fff;
   padding: 0 1rem;
   font-size: 0.9375rem;
   color: var(--ink);
@@ -349,22 +135,20 @@ body > * { position: relative; z-index: 1; }
 }
 
 .tv-input:hover {
-  border-color: rgba(255, 255, 255, 0.13);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--stroke-mid);
 }
 
 .tv-input:focus {
-  border-color: rgba(228, 213, 160, 0.35);
-  box-shadow: 0 0 0 3px rgba(228, 213, 160, 0.08), inset 0 1px 0 rgba(255,255,255,0.04);
-  background: rgba(228, 213, 160, 0.03);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
 }
 
 .tv-input::placeholder {
-  color: rgba(113, 113, 122, 0.65);
+  color: var(--ink-subtle);
 }
 
 select.tv-input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2371717a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231d160d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
@@ -379,28 +163,27 @@ textarea.tv-input {
 }
 
 /* ═══════════════════════════════════════════════
-   BUTTONS
+   BUTTONS — Plum: radius 4px, pad ~14x24
    ═══════════════════════════════════════════════ */
 .tv-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 9999px;
-  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.375rem;
   font-size: 0.9rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--rule);
+  background: transparent;
   color: var(--ink);
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.2s var(--ease), background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .tv-btn:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+  border-color: var(--ink);
+  background: transparent;
 }
 
 .tv-btn:active {
@@ -408,17 +191,17 @@ textarea.tv-input {
 }
 
 .tv-btn-primary {
-  border: none;
-  background: var(--ink-highlight);
-  color: #09090b;
-  font-weight: 700;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  box-shadow: 0 2px 12px rgba(228, 213, 160, 0.20);
 }
 
 .tv-btn-primary:hover {
-  background: color-mix(in oklab, var(--ink-highlight), white 10%);
-  box-shadow: 0 4px 20px rgba(228, 213, 160, 0.30);
+  background: var(--accent-d);
+  border-color: transparent;
+  transform: translateY(-1px);
 }
 
 .tv-btn-accent {
@@ -426,67 +209,87 @@ textarea.tv-input {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 0.75rem;
+  border-radius: var(--radius);
   padding: 0.625rem 1.375rem;
   font-size: 0.875rem;
   font-weight: 600;
   background: var(--accent);
-  color: #09090b;
+  color: #fff;
   border: none;
   cursor: pointer;
   letter-spacing: -0.01em;
-  transition: background 0.15s, box-shadow 0.2s, transform 0.15s;
+  transition: background 0.2s, transform 0.2s var(--ease);
 }
 .tv-btn-accent:hover {
-  background: color-mix(in oklab, var(--accent), #09090b 6%);
-  box-shadow: 0 0 0 4px var(--accent-glow), 0 4px 20px rgba(228, 213, 160, 0.12);
+  background: var(--accent-d);
   transform: translateY(-1px);
 }
 .tv-btn-accent:active { transform: translateY(0); }
+
+/* Dark editorial button (ink bg, paper text) */
+.tv-btn-dark {
+  border: 1px solid transparent;
+  background: var(--ink);
+  color: var(--paper);
+}
+.tv-btn-dark:hover { background: var(--accent); }
 
 /* ═══════════════════════════════════════════════
    SURFACES
    ═══════════════════════════════════════════════ */
 .tv-surface {
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(20, 20, 23, 0.85);
-  border-radius: 1.25rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--rule);
+  background: #fff;
+  border-radius: var(--radius);
 }
 
 .tv-surface-muted {
-  background: var(--card);
-  border: 1px solid var(--stroke);
-  border-radius: 1.25rem;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
 }
 
 /* ═══════════════════════════════════════════════
-   TYPOGRAPHY
+   TYPOGRAPHY — Fraunces editorial headings
    ═══════════════════════════════════════════════ */
 .tv-display {
-  font-family: var(--font-display), ui-sans-serif;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display), 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight: 400 !important;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.tv-serif {
+  font-family: var(--font-display), 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+
+.tv-ital {
+  font-family: var(--font-display), 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .tv-section-label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
 }
 
 .tv-kicker {
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
 
 .tv-gradient-text {
-  background: linear-gradient(135deg, rgba(228, 213, 160, 0.95) 0%, rgba(228, 213, 160, 0.60) 55%, rgba(113, 113, 122, 0.85) 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #ff9a3d 55%, var(--ink) 130%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -499,44 +302,42 @@ textarea.tv-input {
 .tv-shell { width: 100%; background: transparent; }
 
 /* ═══════════════════════════════════════════════
-   CARD SYSTEM
+   CARD SYSTEM — flat editorial, hairline borders
    ═══════════════════════════════════════════════ */
 .tv-card {
-  border: 1px solid var(--stroke);
+  border: 1px solid var(--rule);
   background: var(--card);
-  border-radius: 1rem;
+  border-radius: var(--radius);
   transition: border-color 0.2s ease, background 0.2s ease,
               box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.tv-card-muted { background: var(--paper-muted); }
+.tv-card-muted { background: var(--cream); }
 
 .tv-card-hover:hover,
 .tv-card.tv-interactive:hover {
   background: var(--card-hover);
   border-color: var(--stroke-mid);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.55), 0 0 0 1px var(--stroke-mid);
+  box-shadow: 0 14px 40px rgba(29, 22, 13, 0.08);
   transform: translateY(-2px);
 }
 
 /* Glow card for CTA banners */
 .tv-card-glow {
   border: 1px solid var(--accent-border);
-  background: linear-gradient(135deg, rgba(228, 213, 160, 0.05) 0%, var(--card) 55%);
+  background: linear-gradient(135deg, var(--accent-dim) 0%, var(--card) 55%);
 }
 
 /* ═══════════════════════════════════════════════
    REGISTRATION / RSVP FORM
    ═══════════════════════════════════════════════ */
 
-/* Glass panel wrapper */
+/* Panel wrapper */
 .rsvp-panel {
-  background: linear-gradient(135deg, rgba(20, 20, 23, 0.95) 0%, rgba(24, 24, 28, 0.92) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 1.5rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(255,255,255,0.05) inset;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 64px rgba(29, 22, 13, 0.12);
   overflow: hidden;
 }
 
@@ -544,8 +345,8 @@ textarea.tv-input {
 .rsvp-steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  background: rgba(0,0,0,0.20);
+  border-bottom: 1px solid var(--rule);
+  background: var(--cream);
 }
 
 .rsvp-step-btn {
@@ -564,7 +365,7 @@ textarea.tv-input {
 }
 
 .rsvp-step-btn:not(:last-child) {
-  border-right: 1px solid rgba(255,255,255,0.07);
+  border-right: 1px solid var(--rule);
 }
 
 .rsvp-step-btn:hover { color: var(--ink); }
@@ -582,13 +383,12 @@ textarea.tv-input {
   right: 0.75rem;
   height: 2px;
   border-radius: 0 0 2px 2px;
-  background: rgba(255,255,255,0.08);
+  background: var(--rule);
   transition: background 0.2s ease;
 }
 
 .rsvp-step-btn.active::before {
   background: var(--accent);
-  box-shadow: 0 0 8px rgba(228, 213, 160, 0.35);
 }
 
 /* Step number indicator */
@@ -602,14 +402,14 @@ textarea.tv-input {
   font-size: 0.6rem;
   font-weight: 800;
   margin-right: 0.3rem;
-  background: rgba(255,255,255,0.08);
+  background: rgba(29, 22, 13, 0.08);
   color: var(--ink-muted);
   transition: background 0.18s ease, color 0.18s ease;
 }
 
 .rsvp-step-btn.active .rsvp-step-num {
   background: var(--accent);
-  color: #09090b;
+  color: #fff;
 }
 
 /* Field group */
@@ -622,8 +422,8 @@ textarea.tv-input {
 .rsvp-field label {
   display: block;
   font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-muted);
   transition: color 0.15s ease;
@@ -644,12 +444,12 @@ textarea.tv-input {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(74, 222, 128, 0.20);
-  background: rgba(74, 222, 128, 0.07);
+  border-radius: var(--radius);
+  border: 1px solid rgba(22, 163, 74, 0.25);
+  background: rgba(22, 163, 74, 0.07);
   padding: 0.875rem 1rem;
   font-size: 0.875rem;
-  color: #86efac;
+  color: #15803d;
 }
 
 /* Error banner */
@@ -657,29 +457,29 @@ textarea.tv-input {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(248, 113, 113, 0.20);
-  background: rgba(248, 113, 113, 0.07);
+  border-radius: var(--radius);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  background: rgba(220, 38, 38, 0.06);
   padding: 0.875rem 1rem;
   font-size: 0.875rem;
-  color: #fca5a5;
+  color: #b91c1c;
 }
 
 /* ═══════════════════════════════════════════════
    SIMPLE RSVP FORM (RsvpForm.tsx inline)
    ═══════════════════════════════════════════════ */
 .rsvp-simple-card {
-  background: linear-gradient(135deg, rgba(228,213,160,0.04) 0%, rgba(20,20,23,0.98) 100%);
-  border: 1px solid rgba(228, 213, 160, 0.14);
-  border-radius: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
   padding: 1.75rem;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.40), 0 0 0 1px rgba(228,213,160,0.05) inset;
+  box-shadow: 0 12px 40px rgba(29, 22, 13, 0.07);
 }
 
 /* ═══════════════════════════════════════════════
    DIVIDERS
    ═══════════════════════════════════════════════ */
-.tv-divider { height: 1px; background: var(--stroke); }
+.tv-divider { height: 1px; background: var(--rule); }
 
 /* ═══════════════════════════════════════════════
    PILL / CHIP
@@ -688,12 +488,12 @@ textarea.tv-input {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  border-radius: 9999px;
+  border-radius: 30px;
   padding: 0.28rem 0.8rem;
   font-size: 0.72rem;
-  font-weight: 500;
-  border: 1px solid var(--stroke-mid);
-  background: rgba(255,255,255,0.03);
+  font-weight: 600;
+  border: 1px solid var(--rule);
+  background: #fff;
   color: var(--ink-muted);
   transition: all 0.15s;
 }
@@ -701,7 +501,7 @@ textarea.tv-input {
 .tv-pill-accent {
   border-color: var(--accent-border);
   background: var(--accent-dim);
-  color: var(--accent);
+  color: var(--accent-d);
 }
 
 /* ═══════════════════════════════════════════════
@@ -713,9 +513,9 @@ textarea.tv-input {
 .tv-icon-emerald,
 .tv-icon-amber,
 .tv-icon-rose,
-.tv-icon-indigo { background: var(--card); }
-.tv-icon-teal    { background: linear-gradient(135deg, #134e4a 0%, #2dd4bf 100%); }
-.tv-icon-orange  { background: linear-gradient(135deg, #7c2d12 0%, #fb923c 100%); }
+.tv-icon-indigo { background: var(--cream); }
+.tv-icon-teal    { background: var(--cream); }
+.tv-icon-orange  { background: linear-gradient(135deg, #fe7a00 0%, #ffa54d 100%); }
 
 /* ═══════════════════════════════════════════════
    MISC (event detail compat)
@@ -724,13 +524,13 @@ textarea.tv-input {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-.tv-hard-shadow    { box-shadow: 8px 8px 0 0 rgba(17,17,17,1); }
-.tv-hard-shadow-sm { box-shadow: 4px 4px 0 0 rgba(17,17,17,1); }
+.tv-hard-shadow    { box-shadow: 8px 8px 0 0 rgba(29, 22, 13, 1); }
+.tv-hard-shadow-sm { box-shadow: 4px 4px 0 0 rgba(29, 22, 13, 1); }
 .tv-neo-shadow     { box-shadow: 4px 4px 0 0 var(--accent); }
-.tv-ticket-shadow  { box-shadow: 12px 12px 0 0 var(--on-surface); }
+.tv-ticket-shadow  { box-shadow: 12px 12px 0 0 var(--ink); }
 
 .tv-ticket-perforation {
-  background-image: radial-gradient(circle, transparent 70%, var(--background) 75%);
+  background-image: radial-gradient(circle, transparent 70%, var(--paper) 75%);
   background-size: 20px 20px;
   background-position: -10px center;
   background-repeat: repeat-y;
@@ -741,12 +541,12 @@ textarea.tv-input {
    ═══════════════════════════════════════════════ */
 .tv-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(228, 213, 160, 0.18) transparent;
+  scrollbar-color: var(--stroke-mid) transparent;
 }
 .tv-scrollbar::-webkit-scrollbar { width: 4px; }
 .tv-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .tv-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(228, 213, 160, 0.15);
+  background: var(--stroke-mid);
   border-radius: 9999px;
 }
 .tv-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--accent); }
@@ -787,25 +587,29 @@ textarea.tv-input {
 /* Shimmer for loading states */
 .tv-shimmer {
   background: linear-gradient(90deg,
-    rgba(255,255,255,0.03) 0%,
-    rgba(255,255,255,0.07) 40%,
-    rgba(255,255,255,0.03) 80%);
+    rgba(29, 22, 13, 0.04) 0%,
+    rgba(29, 22, 13, 0.08) 40%,
+    rgba(29, 22, 13, 0.04) 80%);
   background-size: 200% auto;
   animation: shimmer 1.6s linear infinite;
 }
 
 /* ═══════════════════════════════════════════════
-   SITE HEADER ENHANCEMENTS
+   SITE HEADER — Tiesverse wordmark
    ═══════════════════════════════════════════════ */
 .tv-header-logo {
-  font-family: var(--font-logo, var(--font-display)), ui-sans-serif;
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: -0.04em;
+  font-family: var(--font-body), 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
   color: var(--ink);
 }
 
 .tv-header-logo-dot {
+  color: var(--accent);
+}
+
+.tv-header-logo .tv-header-logo-verse {
   color: var(--accent);
 }
 
@@ -823,11 +627,12 @@ textarea.tv-input {
    TICKET CARD — physical ticket aesthetic
    ═══════════════════════════════════════════════ */
 .tv-ticket-card {
-  background: #fdfdf8;
-  border-radius: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.60), 0 2px 8px rgba(0,0,0,0.40);
-  color: #111;
+  box-shadow: 0 12px 48px rgba(29, 22, 13, 0.14);
+  color: var(--ink);
 }
 
 .tv-ticket-section {
@@ -836,7 +641,7 @@ textarea.tv-input {
 
 .tv-ticket-dashes {
   border: none;
-  border-top: 2px dashed rgba(0,0,0,0.12);
+  border-top: 2px dashed var(--rule);
   margin: 0;
 }
 
@@ -845,14 +650,14 @@ textarea.tv-input {
   font-weight: 800;
   letter-spacing: 0.11em;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.40);
+  color: var(--ink-subtle);
   margin-bottom: 0.3rem;
 }
 
 .tv-ticket-value {
   font-size: 0.875rem;
   font-weight: 700;
-  color: #0d0d0d;
+  color: var(--ink);
   word-break: break-all;
 }
 
@@ -872,7 +677,7 @@ textarea.tv-input {
   color: white;
   font-size: 0.9rem;
   font-weight: 700;
-  border-radius: 0.875rem;
+  border-radius: var(--radius);
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -888,18 +693,18 @@ textarea.tv-input {
 .tv-ticket-close-btn {
   width: 100%;
   padding: 1rem;
-  background: rgba(255,255,255,0.055);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 1rem;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
   color: var(--ink);
   font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: border-color 0.15s;
   margin-top: 1rem;
 }
 
-.tv-ticket-close-btn:hover { background: rgba(255,255,255,0.09); }
+.tv-ticket-close-btn:hover { border-color: var(--ink); }
 
 /* ═══════════════════════════════════════════════
    RESPONSIVE — mobile & tablet
@@ -908,11 +713,11 @@ textarea.tv-input {
 /* Better touch targets on mobile */
 @media (max-width: 640px) {
   .tv-btn { min-height: 2.875rem; padding-left: 1.125rem; padding-right: 1.125rem; }
-  .tv-input { height: 3.25rem; font-size: 1rem; border-radius: 0.875rem; }
+  .tv-input { height: 3.25rem; font-size: 1rem; }
   textarea.tv-input { font-size: 1rem; }
 
   /* Header logo on small screens */
-  .tv-header-logo { font-size: 1rem; }
+  .tv-header-logo { font-size: 1.1rem; }
 
   /* Hero section smaller padding */
   .tv-hero-pad { padding: 1.75rem !important; }

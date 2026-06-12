@@ -4,6 +4,11 @@ import { mkdir } from 'node:fs/promises'
 let client: Client | null = null
 let initPromise: Promise<void> | null = null
 
+// Bump this whenever initDb gains a new table/column/index/migration.
+// When the stored version matches, boot skips the ~30-statement schema
+// setup and costs a single round trip to the database.
+const SCHEMA_VERSION = 1
+
 function dbUrl() {
   return process.env.DATABASE_URL ?? 'file:./.data/tiesverse.db'
 }
@@ -16,6 +21,20 @@ async function ensureLocalDir(url: string) {
   const dir = path.slice(0, idx)
   if (!dir) return
   await mkdir(dir, { recursive: true }).catch(() => null)
+}
+
+async function ensureSchema(c: Client) {
+  try {
+    const [, versionRes] = await Promise.all([
+      c.execute('PRAGMA foreign_keys = ON;'),
+      c.execute('SELECT version FROM schema_meta WHERE id = 1'),
+    ])
+    const version = Number((versionRes.rows[0] as any)?.version ?? 0)
+    if (version >= SCHEMA_VERSION) return
+  } catch {
+    // schema_meta missing — first boot, run the full setup below.
+  }
+  await initDb(c)
 }
 
 async function initDb(c: Client) {
@@ -210,6 +229,14 @@ async function initDb(c: Client) {
   await c.execute(`CREATE INDEX IF NOT EXISTS idx_questions_event    ON rsvp_questions(event_id, step, ord);`)
   await c.execute(`CREATE INDEX IF NOT EXISTS idx_submissions_event  ON rsvp_submissions(event_id, created_at DESC);`)
   await c.execute(`CREATE INDEX IF NOT EXISTS idx_submissions_email  ON rsvp_submissions(event_id, email);`)
+
+  // ── Schema version marker (lets the next boot skip all of the above) ──────
+  await c.execute(`CREATE TABLE IF NOT EXISTS schema_meta (id INTEGER PRIMARY KEY, version INTEGER NOT NULL);`)
+  await c.execute({
+    sql: `INSERT INTO schema_meta (id, version) VALUES (1, ?)
+          ON CONFLICT(id) DO UPDATE SET version = excluded.version`,
+    args: [SCHEMA_VERSION],
+  })
 }
 
 export async function getDb() {
@@ -223,7 +250,7 @@ export async function getDb() {
   }
 
   if (!initPromise) {
-    initPromise = initDb(client).catch((err) => {
+    initPromise = ensureSchema(client).catch((err) => {
       initPromise = null
       throw err
     })

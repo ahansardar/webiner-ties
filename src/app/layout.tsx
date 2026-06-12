@@ -1,26 +1,21 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { SiteHeader } from '@/components/SiteHeader'
-import { Chivo, Libre_Franklin, Poppins } from 'next/font/google'
+import { ConditionalHeader } from '@/components/ConditionalHeader'
+import { Fraunces, Manrope } from 'next/font/google'
 
-const body = Libre_Franklin({
+const body = Manrope({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
-const display = Chivo({
+const display = Fraunces({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['400', '600', '700', '800'],
-})
-
-const logo = Poppins({
-  subsets: ['latin'],
-  variable: '--font-logo',
-  display: 'swap',
-  weight: ['600', '700'],
+  style: ['normal', 'italic'],
+  weight: ['300', '400', '500', '600'],
 })
 
 export const metadata: Metadata = {
@@ -42,22 +37,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Prevent flash of wrong theme before JS loads */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('tv-theme');document.documentElement.setAttribute('data-theme',t||'dark');}catch(e){}})();`,
-          }}
-        />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
       </head>
-      <body className={`${body.variable} ${display.variable} ${logo.variable} antialiased`}>
+      <body className={`${body.variable} ${display.variable} antialiased`}>
         <div className="tv-outer">
           <div className="tv-shell">
-            <SiteHeader />
+            <ConditionalHeader />
             <main>{children}</main>
           </div>
         </div>

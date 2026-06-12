@@ -39,7 +39,7 @@ function LoginForm() {
           <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Enter your admin password to continue.</p>
         </div>
 
-        <div className="rounded-2xl border border-white/08 bg-[color:var(--card)] p-6">
+        <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-6">
           <div className="mb-4">
             <label className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-[color:var(--ink-muted)]">
               Password
@@ -57,7 +57,7 @@ function LoginForm() {
           </div>
 
           {error && (
-            <p className="mb-4 rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-400">{error}</p>
+            <p className="mb-4 rounded-[var(--radius)] bg-red-500/10 px-3 py-2 text-sm text-red-400">{error}</p>
           )}
 
           <button

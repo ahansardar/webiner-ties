@@ -34,7 +34,7 @@ export function MiniBarChart({ data }: { data: DataPoint[] }) {
                 width={barW}
                 height={barH}
                 rx={2}
-                fill="rgba(228,213,160,0.7)"
+                fill="rgba(254,122,0,0.75)"
               />
               {d.count > 0 && (
                 <text
@@ -42,7 +42,7 @@ export function MiniBarChart({ data }: { data: DataPoint[] }) {
                   y={y - 3}
                   textAnchor="middle"
                   fontSize={9}
-                  fill="rgba(240,240,244,0.5)"
+                  fill="rgba(29,22,13,0.55)"
                 >
                   {d.count}
                 </text>
@@ -53,7 +53,7 @@ export function MiniBarChart({ data }: { data: DataPoint[] }) {
                   y={chartH + 16}
                   textAnchor="middle"
                   fontSize={9}
-                  fill="rgba(113,113,122,1)"
+                  fill="rgba(29,22,13,0.5)"
                 >
                   {shortDate}
                 </text>

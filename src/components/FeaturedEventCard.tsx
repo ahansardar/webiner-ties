@@ -15,7 +15,7 @@ export function FeaturedEventCard(props: { event: FeaturedEvent; className?: str
         props.className,
       )}
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-white/10 bg-black/20">
+      <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[color:var(--rule)] bg-[color:var(--cream)]">
         {event.posterUrl ? (
           <Image
             alt={event.title}
@@ -29,7 +29,7 @@ export function FeaturedEventCard(props: { event: FeaturedEvent; className?: str
         )}
 
         {event.badge ? (
-          <span className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/50 px-2.5 py-1 text-[11px] font-semibold text-[color:var(--ink)] backdrop-blur">
+          <span className="absolute right-4 top-4 rounded-full border border-[color:var(--rule)] bg-black/50 px-2.5 py-1 text-[11px] font-semibold text-[color:var(--ink)] backdrop-blur">
             {event.badge}
           </span>
         ) : null}

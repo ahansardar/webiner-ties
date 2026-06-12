@@ -331,54 +331,67 @@ export async function createRsvp(input: {
     }
   }
 
-  // Duplicate email check
+  // Duplicate email + ticket-ID collision checks in parallel (one round trip of latency)
   const emailLower = input.structured.email.trim().toLowerCase()
-  const dup = await db.execute({
-    sql: `SELECT id FROM rsvp_submissions WHERE event_id = ? AND LOWER(email) = ?`,
-    args: [event.id, emailLower],
-  })
-  if (dup.rows.length) return { ok: false as const, code: 'ALREADY_REGISTERED' as const }
-
-  // Generate unique ticket ID
   let ticketId = generateTicketId()
-  for (let i = 0; i < 5; i++) {
-    const collision = await db.execute({
+  const [dup, collision] = await Promise.all([
+    db.execute({
+      sql: `SELECT id FROM rsvp_submissions WHERE event_id = ? AND LOWER(email) = ?`,
+      args: [event.id, emailLower],
+    }),
+    db.execute({
       sql: `SELECT id FROM rsvp_submissions WHERE ticket_id = ?`,
       args: [ticketId],
-    })
-    if (!collision.rows.length) break
-    ticketId = generateTicketId()
+    }),
+  ])
+  if (dup.rows.length) return { ok: false as const, code: 'ALREADY_REGISTERED' as const }
+
+  if (collision.rows.length) {
+    for (let i = 0; i < 5; i++) {
+      ticketId = generateTicketId()
+      const again = await db.execute({
+        sql: `SELECT id FROM rsvp_submissions WHERE ticket_id = ?`,
+        args: [ticketId],
+      })
+      if (!again.rows.length) break
+    }
   }
 
   const submissionId = randomUUID()
   const createdAt = nowIso()
 
-  await db.execute({
-    sql: `INSERT INTO rsvp_submissions
-            (id, event_id, ticket_id, created_at,
-             full_name, email, whatsapp, role, org, country, city, heard_from, hope_to_learn)
-          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-    args: [
-      submissionId, event.id, ticketId, createdAt,
-      input.structured.fullName.trim(),
-      emailLower,
-      input.structured.whatsapp.trim(),
-      input.structured.role.trim(),
-      input.structured.org.trim(),
-      input.structured.country.trim(),
-      input.structured.city.trim(),
-      input.structured.heardFrom.trim(),
-      input.structured.hopeToLearn.trim(),
-    ],
-  })
+  // Only answers for questions that exist — unknown keys would violate the FK.
+  const knownQuestionIds = new Set(questions.map((q) => q.id))
+  const answerRows = Object.entries(input.answers).filter(([qid]) => knownQuestionIds.has(qid))
 
-  // Store per-question answers
-  for (const [qid, val] of Object.entries(input.answers)) {
-    await db.execute({
-      sql: `INSERT OR IGNORE INTO rsvp_answers (submission_id, question_id, value) VALUES (?, ?, ?)`,
-      args: [submissionId, qid, val == null ? '' : String(val)],
-    }).catch(() => null) // question_id FK may not exist for unknown keys — ignore
-  }
+  // Submission + all answers in a single batched round trip (one transaction).
+  await db.batch(
+    [
+      {
+        sql: `INSERT INTO rsvp_submissions
+                (id, event_id, ticket_id, created_at,
+                 full_name, email, whatsapp, role, org, country, city, heard_from, hope_to_learn)
+              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        args: [
+          submissionId, event.id, ticketId, createdAt,
+          input.structured.fullName.trim(),
+          emailLower,
+          input.structured.whatsapp.trim(),
+          input.structured.role.trim(),
+          input.structured.org.trim(),
+          input.structured.country.trim(),
+          input.structured.city.trim(),
+          input.structured.heardFrom.trim(),
+          input.structured.hopeToLearn.trim(),
+        ],
+      },
+      ...answerRows.map(([qid, val]) => ({
+        sql: `INSERT OR IGNORE INTO rsvp_answers (submission_id, question_id, value) VALUES (?, ?, ?)`,
+        args: [submissionId, qid, val == null ? '' : String(val)],
+      })),
+    ],
+    'write',
+  )
 
   return { ok: true as const, ticketId, createdAt }
 }
