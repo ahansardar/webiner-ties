@@ -4,7 +4,7 @@ export function HeroCollage(props: { className?: string }) {
   return (
     <div
       className={cn(
-        'relative flex min-h-[320px] flex-col items-center justify-center rounded-[22px] border border-dashed border-[color:var(--stroke-strong)] bg-[color:var(--paper-muted)] p-8 text-center shadow-sm',
+        'relative flex min-h-[320px] flex-col items-center justify-center rounded-[var(--radius)] border border-dashed border-[color:var(--stroke-strong)] bg-[color:var(--paper-muted)] p-8 text-center shadow-sm',
         props.className,
       )}
     >

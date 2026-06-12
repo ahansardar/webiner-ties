@@ -221,7 +221,7 @@ export function RegistrationModal(props: {
       <div className="relative flex min-h-screen w-full items-stretch justify-end p-0 sm:p-4">
         <div
           className={cn(
-            'relative w-full max-h-[100vh] overflow-hidden rounded-none border border-white/10 bg-[color:var(--card)] shadow-[0_24px_80px_rgba(0,0,0,0.70)] transition-transform duration-300 ease-out sm:max-h-[calc(100vh-32px)] sm:rounded-[28px] sm:w-[520px]',
+            'relative w-full max-h-[100vh] overflow-hidden rounded-none border border-[color:var(--rule)] bg-[color:var(--card)] shadow-[0_24px_80px_rgba(29,22,13,0.25)] transition-transform duration-300 ease-out sm:max-h-[calc(100vh-32px)] sm:rounded-[var(--radius)] sm:w-[520px]',
             isShown ? 'translate-x-0' : 'translate-x-full',
           )}
           onClick={(e) => e.stopPropagation()}
@@ -231,7 +231,7 @@ export function RegistrationModal(props: {
             type="button"
             onClick={requestClose}
             aria-label="Close modal"
-            className="absolute right-4 top-4 z-20 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/30 text-[color:var(--ink)] transition-colors hover:bg-black/50"
+            className="absolute right-4 top-4 z-20 inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--rule)] bg-white text-[color:var(--ink)] transition-colors hover:border-[color:var(--ink)]"
           >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -262,7 +262,7 @@ export function RegistrationModal(props: {
                 ) : null}
 
                 <div className="space-y-2 mb-8">
-                  <h2 className="text-2xl font-semibold text-[color:var(--ink)] sm:text-3xl">{stepTitle}</h2>
+                  <h2 className="tv-display text-2xl text-[color:var(--ink)] sm:text-3xl">{stepTitle}</h2>
                   <div className="h-[2px] w-10 rounded-full bg-[color:var(--accent)]" />
                 </div>
 

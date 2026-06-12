@@ -126,7 +126,7 @@ export default function Page() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {values.map((v) => (
             <div key={v.title} className="tv-card tv-card-hover p-6">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--accent-dim)]">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[var(--radius)] bg-[color:var(--accent-dim)]">
                 <span className="material-symbols-outlined text-[20px] text-[color:var(--accent)]">{v.icon}</span>
               </div>
               <h3 className="mb-2 font-semibold text-[color:var(--ink)]">{v.title}</h3>
@@ -156,7 +156,7 @@ export default function Page() {
 
       {/* CTA */}
       <section>
-        <div className="tv-card rounded-[24px] p-8 text-center sm:p-12" style={{ background: 'linear-gradient(135deg, var(--card) 0%, var(--card-hover) 100%)' }}>
+        <div className="tv-card rounded-[var(--radius)] p-8 text-center sm:p-12" style={{ background: 'linear-gradient(135deg, var(--card) 0%, var(--card-hover) 100%)' }}>
           <p className="tv-section-label mb-3">Join the community</p>
           <h2 className="tv-display text-2xl font-semibold text-[color:var(--ink)]">
             Got a topic you want to see covered?

@@ -126,9 +126,9 @@ export default function Page() {
             <div className="space-y-4">
               <a
                 href="mailto:hello@tiesverse.com"
-                className="flex items-center gap-3 rounded-xl p-3 transition-colors hover:bg-[color:var(--accent-dim)]"
+                className="flex items-center gap-3 rounded-[var(--radius)] p-3 transition-colors hover:bg-[color:var(--accent-dim)]"
               >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[color:var(--accent-dim)]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius)] bg-[color:var(--accent-dim)]">
                   <span className="material-symbols-outlined text-[18px] text-[color:var(--accent)]">mail</span>
                 </div>
                 <div>
@@ -139,9 +139,9 @@ export default function Page() {
 
               <a
                 href="#"
-                className="flex items-center gap-3 rounded-xl p-3 transition-colors hover:bg-[color:var(--accent-dim)]"
+                className="flex items-center gap-3 rounded-[var(--radius)] p-3 transition-colors hover:bg-[color:var(--accent-dim)]"
               >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[color:var(--accent-dim)]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius)] bg-[color:var(--accent-dim)]">
                   <span className="material-symbols-outlined text-[18px] text-[color:var(--accent)]">forum</span>
                 </div>
                 <div>
@@ -152,9 +152,9 @@ export default function Page() {
 
               <a
                 href="#"
-                className="flex items-center gap-3 rounded-xl p-3 transition-colors hover:bg-[color:var(--accent-dim)]"
+                className="flex items-center gap-3 rounded-[var(--radius)] p-3 transition-colors hover:bg-[color:var(--accent-dim)]"
               >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[color:var(--accent-dim)]">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius)] bg-[color:var(--accent-dim)]">
                   <span className="material-symbols-outlined text-[18px] text-[color:var(--accent)]">alternate_email</span>
                 </div>
                 <div>

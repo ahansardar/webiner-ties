@@ -48,7 +48,7 @@ export function FeaturedCalendarCard(props: {
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white ring-1 ring-[color:var(--stroke)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-[var(--radius)] bg-white ring-1 ring-[color:var(--stroke)]">
             <span className="text-sm font-semibold text-[color:var(--ink)]">
               {props.calendar.title.slice(0, 1).toUpperCase()}
             </span>

@@ -40,7 +40,7 @@ export function WebinarDetailTabs(props: {
 
   return (
     <div className={props.className}>
-      <div className="flex border-b border-white/10">
+      <div className="flex border-b border-[color:var(--rule)]">
         {tabButton('desc', 'Description')}
         {tabButton('details', 'Details')}
         {tabButton('speakers', 'Speakers')}
@@ -60,7 +60,7 @@ export function WebinarDetailTabs(props: {
             {normalizedDetails.map((item) => (
               <div
                 key={item.label}
-                className="flex items-start justify-between gap-6 border-b border-white/10 py-4"
+                className="flex items-start justify-between gap-6 border-b border-[color:var(--rule)] py-4"
               >
                 <span className="tv-label">
                   {item.label}
@@ -77,7 +77,7 @@ export function WebinarDetailTabs(props: {
       {tab === 'speakers' ? (
         <div className="mt-6 animate-in fade-in duration-500">
           <div className="flex items-center gap-6">
-            <div className="h-24 w-24 flex-none overflow-hidden rounded-2xl border border-white/10 bg-[color:var(--card)]" />
+            <div className="h-24 w-24 flex-none overflow-hidden rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)]" />
             <div>
               <div className="text-[18px] font-semibold text-[color:var(--ink)]">
                 {props.speaker.name}

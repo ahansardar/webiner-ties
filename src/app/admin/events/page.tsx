@@ -22,7 +22,7 @@ export default async function AdminEventsPage() {
         </Link>
       </div>
 
-      <div className="rounded-2xl border border-white/08 bg-[color:var(--card)] overflow-hidden">
+      <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] overflow-hidden">
         {events.length === 0 ? (
           <div className="px-6 py-12 text-center">
             <p className="text-sm text-[color:var(--ink-muted)]">No events yet.</p>
@@ -33,7 +33,7 @@ export default async function AdminEventsPage() {
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/06">
+              <tr className="border-b border-[color:var(--rule)]">
                 <Th>Title</Th>
                 <Th>Date</Th>
                 <Th>Venue</Th>
@@ -49,7 +49,7 @@ export default async function AdminEventsPage() {
                 const isPast = startAt < new Date()
 
                 return (
-                  <tr key={e.id} className="border-b border-white/04 last:border-0 hover:bg-white/02">
+                  <tr key={e.id} className="border-b border-[color:var(--rule)] last:border-0 hover:bg-[rgba(29,22,13,0.04)]">
                     <td className="px-6 py-4">
                       <Link
                         href={`/admin/events/${e.id}`}
@@ -60,7 +60,7 @@ export default async function AdminEventsPage() {
                       {e.tagList.length > 0 && (
                         <div className="mt-1 flex flex-wrap gap-1">
                           {e.tagList.slice(0, 3).map((t) => (
-                            <span key={t} className="rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide bg-white/05 text-[color:var(--ink-muted)]">
+                            <span key={t} className="rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide bg-[rgba(29,22,13,0.04)] text-[color:var(--ink-muted)]">
                               {t}
                             </span>
                           ))}
@@ -119,7 +119,7 @@ function Th({ children, className }: { children: React.ReactNode; className?: st
 function VenueBadge({ type }: { type: string }) {
   const map = { ONLINE: 'Online', IN_PERSON: 'In person', HYBRID: 'Hybrid' }
   return (
-    <span className="rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide bg-white/05 text-[color:var(--ink-muted)]">
+    <span className="rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide bg-[rgba(29,22,13,0.04)] text-[color:var(--ink-muted)]">
       {map[type as keyof typeof map] ?? type}
     </span>
   )
@@ -131,7 +131,7 @@ function StatusBadge({ published }: { published: boolean }) {
       className={`rounded px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
         published
           ? 'bg-emerald-500/10 text-emerald-400'
-          : 'bg-white/05 text-[color:var(--ink-muted)]'
+          : 'bg-[rgba(29,22,13,0.04)] text-[color:var(--ink-muted)]'
       }`}
     >
       {published ? 'Published' : 'Draft'}

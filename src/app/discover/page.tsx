@@ -30,20 +30,21 @@ export default async function Page({
 
   return (
     <Container className="py-12">
-      <h1 className="text-4xl font-semibold tracking-tight text-[color:var(--ink)]">
+      <p className="tv-section-label mb-4">Discover</p>
+      <h1 className="tv-display text-4xl text-[color:var(--ink)] sm:text-5xl">
         Discover Events
       </h1>
       <p className="mt-3 max-w-2xl text-base leading-relaxed text-[color:var(--ink-muted)]">
         Browse upcoming Tiesverse webinars and events.
       </p>
 
-      <div className="tv-card mt-8 rounded-[24px] p-5">
+      <div className="tv-card mt-8 rounded-[var(--radius)] p-5">
         <DiscoverControls />
       </div>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {events.length === 0 ? (
-          <div className="tv-card rounded-[24px] p-8 text-sm text-[color:var(--ink-muted)]">
+          <div className="tv-card rounded-[var(--radius)] p-8 text-sm text-[color:var(--ink-muted)]">
             No results. Try clearing filters or searching a different tag.
           </div>
         ) : (

@@ -16,13 +16,13 @@ export function MobileAttendBar(props: {
       {/* Sticky bottom bar — mobile only */}
       <div className="fixed bottom-0 inset-x-0 z-40 md:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
         {/* Gradient fade above the bar */}
-        <div className="pointer-events-none absolute inset-x-0 top-[-40px] h-10 bg-gradient-to-t from-[#09090b]/80 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-[-40px] h-10 bg-gradient-to-t from-[#fffaf2]/90 to-transparent" />
 
         <div
           className="relative flex items-center gap-3 border-t px-4 py-3"
           style={{
-            background: 'rgba(9,9,11,0.92)',
-            borderColor: 'rgba(255,255,255,0.08)',
+            background: 'rgba(255,250,242,0.94)',
+            borderColor: 'var(--rule)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
           }}
@@ -42,11 +42,11 @@ export function MobileAttendBar(props: {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="shrink-0 rounded-xl px-5 py-3 text-[14px] font-bold"
+            className="shrink-0 rounded-[var(--radius)] px-5 py-3 text-[14px] font-bold"
             style={{
               background: 'var(--accent)',
-              color: '#09090b',
-              boxShadow: '0 2px 16px rgba(228,213,160,0.25)',
+              color: '#fff',
+              boxShadow: '0 2px 16px rgba(254,122,0,0.30)',
             }}
           >
             Attend

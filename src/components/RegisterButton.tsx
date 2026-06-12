@@ -21,7 +21,7 @@ export function RegisterButton(props: {
 
   return (
     <>
-      <div className={cn('tv-card rounded-[24px] p-5', props.className)}>
+      <div className={cn('tv-card rounded-[var(--radius)] p-5', props.className)}>
         <div className="flex items-center justify-between gap-4">
           <div>
             <div className="tv-kicker text-[10px] font-semibold text-[color:var(--ink-muted)]">

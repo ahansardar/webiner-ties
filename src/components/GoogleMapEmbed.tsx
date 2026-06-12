@@ -35,8 +35,8 @@ export function GoogleMapEmbed(props: {
   const variant = props.variant ?? 'soft'
   const frameClassName =
     variant === 'hard'
-      ? 'overflow-hidden rounded-[22px] border border-white/10 bg-[color:var(--card)]'
-      : 'overflow-hidden rounded-[22px] border border-white/10 bg-[color:var(--card)]'
+      ? 'overflow-hidden rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)]'
+      : 'overflow-hidden rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)]'
 
   return (
     <div className={props.className}>

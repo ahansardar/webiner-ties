@@ -62,7 +62,7 @@ export function LocalEventsExplorer(props: {
             className="tv-card group flex items-center justify-between gap-3 px-4 py-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
           >
             <div className="flex min-w-0 items-center gap-3">
-              <span className="h-10 w-10 rounded-2xl border border-[color:var(--stroke)] bg-[color:color-mix(in_oklab,var(--brand),white_88%)]" />
+              <span className="h-10 w-10 rounded-[var(--radius)] border border-[color:var(--stroke)] bg-[color:color-mix(in_oklab,var(--brand),white_88%)]" />
               <div className="min-w-0">
                 <div className="truncate text-sm font-semibold text-[color:var(--ink)] group-hover:text-[color:var(--brand)]">
                   {c.name}

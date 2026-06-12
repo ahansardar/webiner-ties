@@ -232,19 +232,19 @@ export function EventForm({
               type="checkbox"
               checked={form.isPublished}
               onChange={setChecked('isPublished')}
-              className="h-4 w-4 rounded border-white/20"
+              className="h-4 w-4 rounded border-[color:var(--rule)]"
             />
             <span className="text-sm text-[color:var(--ink)]">Published (visible to public)</span>
           </label>
         </Section>
 
         {error && (
-          <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4 text-sm text-red-400">
+          <div className="rounded-[var(--radius)] bg-red-500/10 border border-red-500/20 p-4 text-sm text-red-400">
             {error}
           </div>
         )}
         {success && (
-          <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-sm text-emerald-400">
+          <div className="rounded-[var(--radius)] bg-emerald-500/10 border border-emerald-500/20 p-4 text-sm text-emerald-400">
             {success}
           </div>
         )}
@@ -274,7 +274,7 @@ export function EventForm({
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-white/08 bg-[color:var(--card)] p-6">
+    <div className="rounded-[var(--radius)] border border-[color:var(--rule)] bg-[color:var(--card)] p-6">
       <h2 className="mb-5 text-sm font-semibold uppercase tracking-wide text-[color:var(--ink-muted)]">{title}</h2>
       <div className="space-y-4">{children}</div>
     </div>
