@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { SiteHeader } from '@/components/SiteHeader'
+import { ConditionalHeader } from '@/components/ConditionalHeader'
 import { Fraunces, Manrope } from 'next/font/google'
 
 const body = Manrope({
@@ -46,7 +46,7 @@ export default function RootLayout({
       <body className={`${body.variable} ${display.variable} antialiased`}>
         <div className="tv-outer">
           <div className="tv-shell">
-            <SiteHeader />
+            <ConditionalHeader />
             <main>{children}</main>
           </div>
         </div>

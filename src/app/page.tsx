@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { listEvents } from '@/server/events'
+import { getSupabaseWebinars } from '@/server/supabaseEvents'
 import { EventCard } from '@/components/EventCard'
+import { SupabaseEventCard } from '@/components/SupabaseEventCard'
 import { CategoryCard } from '@/components/CategoryCard'
 import { FeaturedEventCard } from '@/components/FeaturedEventCard'
 import { categories, featuredEvents } from '@/data/homeDiscover'
@@ -11,7 +13,10 @@ export const revalidate = 60
 
 export default async function Page() {
   const now = new Date()
-  const events = await listEvents({ take: 80 })
+  const [events, supabaseItems] = await Promise.all([
+    listEvents({ take: 80 }),
+    getSupabaseWebinars().catch(() => []),
+  ])
 
   const upcoming = events
     .filter((event) => new Date(event.startAt).getTime() >= now.getTime())
@@ -104,6 +109,22 @@ export default async function Page() {
           )}
         </div>
       </section>
+
+      {supabaseItems.length > 0 && (
+        <section className="mb-14">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="tv-display text-2xl text-[color:var(--ink)]">Workshops &amp; Events</h2>
+              <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Sessions from our full collection.</p>
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {supabaseItems.slice(0, 6).map((item) => (
+              <SupabaseEventCard key={`${item.source}-${item.id}`} item={item} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mb-14">
         <div className="flex items-end justify-between gap-6">
